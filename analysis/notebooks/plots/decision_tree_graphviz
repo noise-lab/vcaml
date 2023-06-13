@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, style="filled", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label="T2 <= -0.099\ngini = 0.364\nsamples = 58503\nvalue = [899, 5553, 45913, 6138]\nclass = -1", fillcolor="#69b5eb"] ;
+1 [label="frame.time_relative <= 11.821\ngini = 0.593\nsamples = 5924\nvalue = [466, 3392, 1492, 574]\nclass = 1", fillcolor="#b0f4aa"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+2 [label="S0 <= 0.658\ngini = 0.547\nsamples = 1906\nvalue = [26, 179, 1140, 561]\nclass = -1", fillcolor="#aad5f4"] ;
+1 -> 2 ;
+3 [label="gini = 0.47\nsamples = 1442\nvalue = [5, 10, 917, 510]\nclass = -1", fillcolor="#a9d4f4"] ;
+2 -> 3 ;
+4 [label="gini = 0.622\nsamples = 464\nvalue = [21, 169, 223, 51]\nclass = -1", fillcolor="#dbedfa"] ;
+2 -> 4 ;
+5 [label="T2 <= -0.157\ngini = 0.341\nsamples = 4018\nvalue = [440, 3213, 352, 13]\nclass = 1", fillcolor="#70eb66"] ;
+1 -> 5 ;
+6 [label="gini = 0.283\nsamples = 347\nvalue = [291, 19, 36, 1]\nclass = 0", fillcolor="#ea985d"] ;
+5 -> 6 ;
+7 [label="gini = 0.234\nsamples = 3671\nvalue = [149, 3194, 316, 12]\nclass = 1", fillcolor="#61e955"] ;
+5 -> 7 ;
+8 [label="T1 <= -0.075\ngini = 0.273\nsamples = 52579\nvalue = [433, 2161, 44421, 5564]\nclass = -1", fillcolor="#5baeea"] ;
+0 -> 8 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+9 [label="T1 <= -0.125\ngini = 0.343\nsamples = 1121\nvalue = [139, 895, 68, 19]\nclass = 1", fillcolor="#71eb67"] ;
+8 -> 9 ;
+10 [label="gini = 0.111\nsamples = 103\nvalue = [97, 1, 0, 5]\nclass = 0", fillcolor="#e78945"] ;
+9 -> 10 ;
+11 [label="gini = 0.222\nsamples = 1018\nvalue = [42, 894, 68, 14]\nclass = 1", fillcolor="#5fe853"] ;
+9 -> 11 ;
+12 [label="frame.time_relative <= 11.455\ngini = 0.245\nsamples = 51458\nvalue = [294, 1266, 44353, 5545]\nclass = -1", fillcolor="#58ace9"] ;
+8 -> 12 ;
+13 [label="gini = 0.451\nsamples = 2835\nvalue = [0, 16, 1880, 939]\nclass = -1", fillcolor="#9dcef2"] ;
+12 -> 13 ;
+14 [label="gini = 0.227\nsamples = 48623\nvalue = [294, 1250, 42473, 4606]\nclass = -1", fillcolor="#55abe9"] ;
+12 -> 14 ;
+}

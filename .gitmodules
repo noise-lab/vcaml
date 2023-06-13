@@ -1,0 +1,6 @@
+[submodule "conext-submission/Inferring-QoE-for-VCAs"]
+	path = conext-submission/Inferring-QoE-for-VCAs
+	url = git@github.com:agupta13/Inferring-QoE-for-VCAs.git
+[submodule "netrics-vca-test"]
+	path = netrics-vca-test
+	url = git@github.com:tarunmangla/netrics-vca-test.git

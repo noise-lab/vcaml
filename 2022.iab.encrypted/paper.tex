@@ -1,0 +1,65 @@
+\documentclass[conference=acm,abstract=off]{confpaper}
+
+% General
+% -------
+\usepackage{pdflscape}
+
+% Bibliography
+% ------------
+\bibliography{paper}
+
+% Commands
+\newcommand{\meet}{Meet\xspace}
+\newcommand{\teams}{Teams\xspace}
+% --------
+
+\pgfsetarrows{latex-latex}
+\tikzset{%
+  base/.style = {inner sep=5pt,
+                 text centered,
+                 thin,
+                 font=\rmfamily},
+  round/.style = {base,
+                  rectangle,
+                  rounded corners=1ex,
+                  draw=black,
+                  fill=gray!20,
+                  minimum height=0.35in}
+}
+
+%%%%%%%%%%%%%%%%%%%%  SPACE SAVINGS %%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[all=normal,wordspacing]{savetrees}
+
+%%%%%%%%%%%%%%%%%%%%  TITLE/AUTHORS  %%%%%%%%%%%%%%%%%%%%%
+
+\title{QoE Metrics Estimation for Video Conferencing using Passive Network Measurements}
+
+\author{Tarun Mangla, Junchen Jiang, Nick Feamster, Arpit Gupta}
+
+\titlespacing\section{0pt}{*1.8}{*1.1}
+\titlespacing\subsection{0pt}{*1.5}{*1.1}
+\titlespacing\subsection{0pt}{*1.3}{*0.8}
+
+%%%%%%%%%%%%%%%%%%%%  START OF DOCUMENT  %%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\input{abstract}
+\maketitle
+
+
+\input{introduction}
+
+\microtypesetup{protrusion=false}
+
+\newpage
+\printbibliography
+
+\vfill
+\pagebreak
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%  END OF DOCUMENT  %%%%%%%%%%%%%%%%%%%%

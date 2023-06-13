@@ -1,0 +1,2652 @@
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.82
+VCA = teams
+ | MAE = 1.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.92
+VCA = teams
+ | MAE = 1.47
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 86553.61
+VCA = teams
+ | MAE = 107947.76
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 88130.43
+VCA = teams
+ | MAE = 105856.14
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 7.8
+VCA = teams
+ | MAE = 8.01
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 9.52
+VCA = teams
+ | MAE = 8.99
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | Acc = 96.22
+VCA = teams
+ | Acc = 76.28
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | Acc = 95.08
+VCA = teams
+ | Acc = 76.07
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 1.71
+VCA = teams
+ | MAE = 1.22
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 119630.12
+VCA = teams
+ | MAE = 126273.79
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 23.8
+VCA = teams
+ | MAE = 7.67
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 3.32
+VCA = teams
+ | MAE = 1.87
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 134814.64
+VCA = teams
+ | MAE = 114683.06
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 93.68
+VCA = teams
+ | MAE = 48.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.68
+VCA = teams
+ | MAE = 1.28
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.77
+VCA = teams
+ | MAE = 1.44
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 1.78
+VCA = teams
+ | MAE = 1.21
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 3.38
+VCA = teams
+ | MAE = 1.85
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 90752.51
+VCA = teams
+ | MAE = 115420.81
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 91070.98
+VCA = teams
+ | MAE = 109989.97
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 125426.44
+VCA = teams
+ | MAE = 128706.43
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 140944.33
+VCA = teams
+ | MAE = 117029.77
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 7.63
+VCA = teams
+ | MAE = 7.86
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 9.74
+VCA = teams
+ | MAE = 8.92
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 23.86
+VCA = teams
+ | MAE = 7.54
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 94.96
+VCA = teams
+ | MAE = 47.84
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | Acc = 96.56
+VCA = teams
+ | Acc = 75.77
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | Acc = 95.52
+VCA = teams
+ | Acc = 75.65
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.72
+VCA = teams
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.72
+VCA = teams
+ | MAE = 1.45
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.73
+VCA = teams
+ | MAE = 1.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 2.72
+VCA = teams
+ | MAE = 1.44
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 1.77
+VCA = teams
+ | MAE = 1.18
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 90073.88
+VCA = teams
+ | MAE = 114544.36
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 92142.07
+VCA = teams
+ | MAE = 110557.6
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 125426.44
+VCA = teams
+ | MAE = 128706.43
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 8.67
+VCA = teams
+ | MAE = 7.82
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_13May_original
+VCA = meet
+ | MAE = 9.83
+VCA = teams
+ | MAE = 8.97
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.55
+VCA = meet
+ | MAE = 1.2
+VCA = webex
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.75
+VCA = meet
+ | MAE = 1.39
+VCA = webex
+ | MAE = 1.36
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.81
+VCA = meet
+ | MAE = 1.58
+VCA = webex
+ | MAE = 1.1
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43156.51
+VCA = meet
+ | MAE = 9312.22
+VCA = webex
+ | MAE = 15956.59
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43591.35
+VCA = meet
+ | MAE = 9780.18
+VCA = webex
+ | MAE = 16114.3
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 72003.5
+VCA = meet
+ | MAE = 15794.26
+VCA = webex
+ | MAE = 27588.57
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.48
+VCA = meet
+ | MAE = 22.75
+VCA = webex
+ | MAE = 36.08
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 31.6
+VCA = meet
+ | MAE = 23.76
+VCA = webex
+ | MAE = 37.6
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.27
+VCA = meet
+ | MAE = 28.37
+VCA = webex
+ | MAE = 23.28
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 52.91
+VCA = meet
+ | Acc = 97.92
+VCA = webex
+ | Acc = 99.31
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.11
+VCA = meet
+ | Acc = 97.78
+VCA = webex
+ | Acc = 99.39
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.54
+VCA = meet
+ | MAE = 1.19
+VCA = webex
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.74
+VCA = meet
+ | MAE = 1.39
+VCA = webex
+ | MAE = 1.37
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 42694.67
+VCA = meet
+ | MAE = 9220.29
+VCA = webex
+ | MAE = 15796.62
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43515.01
+VCA = meet
+ | MAE = 9677.27
+VCA = webex
+ | MAE = 15916.99
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.36
+VCA = meet
+ | MAE = 2.43
+VCA = webex
+ | MAE = 1.82
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.53
+VCA = meet
+ | MAE = 22.82
+VCA = webex
+ | MAE = 35.48
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 31.49
+VCA = meet
+ | MAE = 23.71
+VCA = webex
+ | MAE = 37.77
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 52.72
+VCA = meet
+ | Acc = 97.89
+VCA = webex
+ | Acc = 99.31
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.06
+VCA = meet
+ | Acc = 97.73
+VCA = webex
+ | Acc = 99.35
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65226.35
+VCA = meet
+ | MAE = 30425.95
+VCA = webex
+ | MAE = 24076.16
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 36.88
+VCA = meet
+ | MAE = 162.63
+VCA = webex
+ | MAE = 28.72
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.69
+VCA = meet
+ | MAE = 1.35
+VCA = webex
+ | MAE = 1.31
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43442.44
+VCA = meet
+ | MAE = 9679.12
+VCA = webex
+ | MAE = 15937.54
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 31.43
+VCA = meet
+ | MAE = 23.61
+VCA = webex
+ | MAE = 37.69
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.63
+VCA = meet
+ | Acc = 97.79
+VCA = webex
+ | Acc = 99.35
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.7
+VCA = meet
+ | MAE = 1.35
+VCA = webex
+ | MAE = 1.32
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.54
+VCA = meet
+ | MAE = 1.18
+VCA = webex
+ | MAE = 1.24
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43509.39
+VCA = meet
+ | MAE = 9685.67
+VCA = webex
+ | MAE = 15963.34
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.76
+VCA = meet
+ | MAE = 3.21
+VCA = webex
+ | MAE = 1.82
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 66393.23
+VCA = meet
+ | MAE = 30929.06
+VCA = webex
+ | MAE = 24076.16
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.49
+VCA = meet
+ | MAE = 1.62
+VCA = webex
+ | MAE = 1.82
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.4
+VCA = meet
+ | MAE = 1.62
+VCA = webex
+ | MAE = 1.82
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65399.94
+VCA = meet
+ | MAE = 30057.66
+VCA = webex
+ | MAE = 24076.16
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 37.83
+VCA = meet
+ | MAE = 155.6
+VCA = webex
+ | MAE = 28.72
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.36
+VCA = meet
+ | MAE = 1.55
+VCA = webex
+ | MAE = 1.72
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65226.35
+VCA = meet
+ | MAE = 30071.25
+VCA = webex
+ | MAE = 23986.68
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 36.88
+VCA = meet
+ | MAE = 155.88
+VCA = webex
+ | MAE = 27.91
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.57
+VCA = meet
+ | MAE = 1.2
+VCA = webex
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.68
+VCA = meet
+ | MAE = 1.35
+VCA = webex
+ | MAE = 1.32
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 42608.38
+VCA = meet
+ | MAE = 9321.61
+VCA = webex
+ | MAE = 15934.18
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43674.42
+VCA = meet
+ | MAE = 9694.67
+VCA = webex
+ | MAE = 15997.41
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.55
+VCA = meet
+ | MAE = 22.75
+VCA = webex
+ | MAE = 34.49
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 31.35
+VCA = meet
+ | MAE = 23.91
+VCA = webex
+ | MAE = 37.54
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 52.66
+VCA = meet
+ | Acc = 97.89
+VCA = webex
+ | Acc = 99.31
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.18
+VCA = meet
+ | Acc = 97.81
+VCA = webex
+ | Acc = 99.36
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 1.79
+VCA = teams
+ | MAE = 3.01
+VCA = meet
+ | MAE = 1.62
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 1.98
+VCA = teams
+ | MAE = 3.39
+VCA = meet
+ | MAE = 2.22
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 1.52
+VCA = teams
+ | MAE = 2.89
+VCA = meet
+ | MAE = 2.43
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 2.54
+VCA = teams
+ | MAE = 3.72
+VCA = meet
+ | MAE = 2.68
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 28883.71
+VCA = teams
+ | MAE = 68911.32
+VCA = meet
+ | MAE = 17257.41
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 30111.37
+VCA = teams
+ | MAE = 68145.21
+VCA = meet
+ | MAE = 17193.6
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 37921.46
+VCA = teams
+ | MAE = 83400.73
+VCA = meet
+ | MAE = 24322.96
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 35124.79
+VCA = teams
+ | MAE = 75154.01
+VCA = meet
+ | MAE = 48591.02
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 11.06
+VCA = teams
+ | MAE = 40.92
+VCA = meet
+ | MAE = 13.71
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 13.39
+VCA = teams
+ | MAE = 38.67
+VCA = meet
+ | MAE = 14.61
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 9.85
+VCA = teams
+ | MAE = 30.39
+VCA = meet
+ | MAE = 21.37
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 1.55
+VCA = teams
+ | MAE = 2.44
+VCA = meet
+ | MAE = 1.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 1.56
+VCA = teams
+ | MAE = 3.12
+VCA = meet
+ | MAE = 2.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 1.31
+VCA = teams
+ | MAE = 2.96
+VCA = meet
+ | MAE = 2.47
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 2.47
+VCA = teams
+ | MAE = 3.89
+VCA = meet
+ | MAE = 2.78
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 22901.35
+VCA = teams
+ | MAE = 55604.61
+VCA = meet
+ | MAE = 14776.52
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 22834.29
+VCA = teams
+ | MAE = 57761.84
+VCA = meet
+ | MAE = 16501.18
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 35609.26
+VCA = teams
+ | MAE = 86680.67
+VCA = meet
+ | MAE = 24197.2
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 32851.66
+VCA = teams
+ | MAE = 75865.59
+VCA = meet
+ | MAE = 46584.34
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 8.23
+VCA = teams
+ | MAE = 43.95
+VCA = meet
+ | MAE = 13.71
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 10.73
+VCA = teams
+ | MAE = 42.45
+VCA = meet
+ | MAE = 17.52
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 8.77
+VCA = teams
+ | MAE = 30.84
+VCA = meet
+ | MAE = 24.32
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | MAE = 12.82
+VCA = teams
+ | MAE = 40.84
+VCA = meet
+ | MAE = 137.11
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | Acc = 99.22
+VCA = teams
+ | Acc = 65.74
+VCA = meet
+ | Acc = 96.97
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_Sensitivity_Data_original
+VCA = webex
+ | Acc = 99.22
+VCA = teams
+ | Acc = 62.3
+VCA = meet
+ | Acc = 96.52
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.56
+VCA = meet
+ | MAE = 1.2
+VCA = webex
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.71
+VCA = meet
+ | MAE = 1.34
+VCA = webex
+ | MAE = 1.32
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.81
+VCA = meet
+ | MAE = 1.58
+VCA = webex
+ | MAE = 1.1
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.36
+VCA = meet
+ | MAE = 1.55
+VCA = webex
+ | MAE = 1.72
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 42396.85
+VCA = meet
+ | MAE = 9315.92
+VCA = webex
+ | MAE = 15928.79
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43824.07
+VCA = meet
+ | MAE = 9785.66
+VCA = webex
+ | MAE = 16125.38
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 72003.5
+VCA = meet
+ | MAE = 15794.26
+VCA = webex
+ | MAE = 27588.57
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65226.35
+VCA = meet
+ | MAE = 30071.25
+VCA = webex
+ | MAE = 23986.68
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.35
+VCA = meet
+ | MAE = 22.56
+VCA = webex
+ | MAE = 35.57
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 31.44
+VCA = meet
+ | MAE = 23.63
+VCA = webex
+ | MAE = 38.58
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.27
+VCA = meet
+ | MAE = 28.37
+VCA = webex
+ | MAE = 23.28
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 36.88
+VCA = meet
+ | MAE = 155.88
+VCA = webex
+ | MAE = 27.91
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 52.68
+VCA = meet
+ | Acc = 97.88
+VCA = webex
+ | Acc = 99.31
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.39
+VCA = meet
+ | Acc = 97.78
+VCA = webex
+ | Acc = 99.31
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.36
+VCA = meet
+ | MAE = 1.54
+VCA = webex
+ | MAE = 1.72
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65226.35
+VCA = meet
+ | MAE = 29967.41
+VCA = webex
+ | MAE = 23985.98
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 36.88
+VCA = meet
+ | MAE = 35.25
+VCA = webex
+ | MAE = 27.59
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.56
+VCA = meet
+ | MAE = 1.19
+VCA = webex
+ | MAE = 1.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.57
+VCA = meet
+ | MAE = 1.2
+VCA = webex
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.41
+VCA = meet
+ | MAE = 1.09
+VCA = webex
+ | MAE = 1.16
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.57
+VCA = meet
+ | MAE = 1.19
+VCA = webex
+ | MAE = 1.25
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.41
+VCA = meet
+ | MAE = 1.09
+VCA = webex
+ | MAE = 1.17
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.31
+VCA = meet
+ | MAE = 1.02
+VCA = webex
+ | MAE = 1.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.26
+VCA = meet
+ | MAE = 0.97
+VCA = webex
+ | MAE = 1.08
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.21
+VCA = meet
+ | MAE = 0.94
+VCA = webex
+ | MAE = 1.05
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.17
+VCA = meet
+ | MAE = 0.91
+VCA = webex
+ | MAE = 1.03
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.15
+VCA = meet
+ | MAE = 0.89
+VCA = webex
+ | MAE = 1.02
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.12
+VCA = meet
+ | MAE = 0.87
+VCA = webex
+ | MAE = 1.0
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.1
+VCA = meet
+ | MAE = 0.86
+VCA = webex
+ | MAE = 0.99
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.09
+VCA = meet
+ | MAE = 0.85
+VCA = webex
+ | MAE = 0.98
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.71
+VCA = meet
+ | MAE = 1.35
+VCA = webex
+ | MAE = 1.33
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.57
+VCA = meet
+ | MAE = 1.16
+VCA = webex
+ | MAE = 1.25
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.5
+VCA = meet
+ | MAE = 1.06
+VCA = webex
+ | MAE = 1.2
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.45
+VCA = meet
+ | MAE = 1.01
+VCA = webex
+ | MAE = 1.18
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.42
+VCA = meet
+ | MAE = 0.98
+VCA = webex
+ | MAE = 1.16
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.39
+VCA = meet
+ | MAE = 0.95
+VCA = webex
+ | MAE = 1.14
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.37
+VCA = meet
+ | MAE = 0.93
+VCA = webex
+ | MAE = 1.13
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.35
+VCA = meet
+ | MAE = 0.92
+VCA = webex
+ | MAE = 1.11
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.33
+VCA = meet
+ | MAE = 0.9
+VCA = webex
+ | MAE = 1.1
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window
+VCA = teams
+ | MAE = 1.32
+VCA = meet
+ | MAE = 0.89
+VCA = webex
+ | MAE = 1.09
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.2
+VCA = meet
+ | MAE = 1.53
+VCA = webex
+ | MAE = 1.75
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.2
+VCA = meet
+ | MAE = 1.53
+VCA = webex
+ | MAE = 1.75
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.2
+VCA = meet
+ | MAE = 1.53
+VCA = webex
+ | MAE = 1.75
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.2
+VCA = meet
+ | MAE = 1.53
+VCA = webex
+ | MAE = 1.75
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 69624.47
+VCA = meet
+ | MAE = 31032.16
+VCA = webex
+ | MAE = 24487.02
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 25.99
+VCA = meet
+ | MAE = 28.72
+VCA = webex
+ | MAE = 22.91
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.55
+VCA = meet
+ | MAE = 1.3
+VCA = webex
+ | MAE = 1.33
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.14
+VCA = meet
+ | MAE = 0.89
+VCA = webex
+ | MAE = 1.1
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.01
+VCA = meet
+ | MAE = 0.77
+VCA = webex
+ | MAE = 1.02
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.96
+VCA = meet
+ | MAE = 0.73
+VCA = webex
+ | MAE = 0.98
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.96
+VCA = meet
+ | MAE = 0.66
+VCA = webex
+ | MAE = 0.97
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.86
+VCA = meet
+ | MAE = 0.66
+VCA = webex
+ | MAE = 0.91
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.86
+VCA = meet
+ | MAE = 0.63
+VCA = webex
+ | MAE = 0.84
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.8
+VCA = meet
+ | MAE = 0.62
+VCA = webex
+ | MAE = 0.87
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.84
+VCA = meet
+ | MAE = 0.64
+VCA = webex
+ | MAE = 0.79
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.84
+VCA = meet
+ | MAE = 0.65
+VCA = webex
+ | MAE = 0.82
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.56
+VCA = meet
+ | MAE = 1.19
+VCA = webex
+ | MAE = 1.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.1
+VCA = meet
+ | MAE = 0.89
+VCA = webex
+ | MAE = 1.02
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.87
+VCA = meet
+ | MAE = 0.68
+VCA = webex
+ | MAE = 0.87
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.85
+VCA = meet
+ | MAE = 0.63
+VCA = webex
+ | MAE = 0.81
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.75
+VCA = meet
+ | MAE = 0.57
+VCA = webex
+ | MAE = 0.77
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.64
+VCA = meet
+ | MAE = 0.55
+VCA = webex
+ | MAE = 0.77
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.66
+VCA = meet
+ | MAE = 0.54
+VCA = webex
+ | MAE = 0.72
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.6
+VCA = meet
+ | MAE = 0.52
+VCA = webex
+ | MAE = 0.67
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.6
+VCA = meet
+ | MAE = 0.46
+VCA = webex
+ | MAE = 0.62
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 0.58
+VCA = meet
+ | MAE = 0.52
+VCA = webex
+ | MAE = 0.65
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 1.03
+VCA = webex
+ | MAE = 1.41
+VCA = teams
+ | MAE = 1.72
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 1.6
+VCA = teams
+ | MAE = 2.45
+VCA = webex
+ | MAE = 2.6
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.56
+VCA = teams
+ | MAE = 2.37
+VCA = meet
+ | MAE = 1.4
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.27
+VCA = teams
+ | MAE = 1.8
+VCA = meet
+ | MAE = 1.8
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 6.12
+VCA = webex
+ | MAE = 1.78
+VCA = meet
+ | MAE = 3.61
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 1.02
+VCA = webex
+ | MAE = 1.47
+VCA = teams
+ | MAE = 1.7
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 1.56
+VCA = teams
+ | MAE = 2.48
+VCA = webex
+ | MAE = 2.64
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.59
+VCA = teams
+ | MAE = 2.38
+VCA = meet
+ | MAE = 1.41
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.26
+VCA = teams
+ | MAE = 1.83
+VCA = meet
+ | MAE = 1.8
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 6.11
+VCA = webex
+ | MAE = 1.78
+VCA = meet
+ | MAE = 3.63
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 1.15
+VCA = webex
+ | MAE = 1.32
+VCA = teams
+ | MAE = 1.65
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 1.4
+VCA = teams
+ | MAE = 2.43
+VCA = webex
+ | MAE = 2.7
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.62
+VCA = teams
+ | MAE = 2.15
+VCA = meet
+ | MAE = 1.13
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.14
+VCA = teams
+ | MAE = 1.79
+VCA = meet
+ | MAE = 1.54
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 4.89
+VCA = webex
+ | MAE = 1.8
+VCA = meet
+ | MAE = 2.69
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65075.61
+VCA = meet
+ | MAE = 14163.52
+VCA = webex
+ | MAE = 23649.83
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.55
+VCA = meet
+ | MAE = 1.19
+VCA = webex
+ | MAE = 1.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.6
+VCA = meet
+ | MAE = 1.57
+VCA = webex
+ | MAE = 1.33
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.81
+VCA = meet
+ | MAE = 1.58
+VCA = webex
+ | MAE = 1.1
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.89
+VCA = meet
+ | MAE = 2.83
+VCA = webex
+ | MAE = 1.75
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 42545.86
+VCA = meet
+ | MAE = 9324.26
+VCA = webex
+ | MAE = 15972.22
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 46824.59
+VCA = meet
+ | MAE = 10030.97
+VCA = webex
+ | MAE = 16110.24
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65075.61
+VCA = meet
+ | MAE = 14163.52
+VCA = webex
+ | MAE = 23649.83
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 71307.71
+VCA = meet
+ | MAE = 26036.24
+VCA = webex
+ | MAE = 24489.46
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.47
+VCA = meet
+ | MAE = 22.57
+VCA = webex
+ | MAE = 35.4
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 27.58
+VCA = meet
+ | MAE = 22.81
+VCA = webex
+ | MAE = 38.74
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.27
+VCA = meet
+ | MAE = 28.37
+VCA = webex
+ | MAE = 23.28
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 24.36
+VCA = meet
+ | MAE = 28.5
+VCA = webex
+ | MAE = 22.93
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 64.68
+VCA = meet
+ | MAE = 2.65
+VCA = webex
+ | MAE = 1.3
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 67.29
+VCA = meet
+ | MAE = 2.95
+VCA = webex
+ | MAE = 1.33
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 52.16
+VCA = meet
+ | Acc = 97.88
+VCA = webex
+ | Acc = 99.31
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.74
+VCA = meet
+ | Acc = 97.7
+VCA = webex
+ | Acc = 99.29
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 1.14
+VCA = webex
+ | MAE = 1.44
+VCA = teams
+ | MAE = 1.71
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 1.55
+VCA = teams
+ | MAE = 2.35
+VCA = webex
+ | MAE = 2.57
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.63
+VCA = teams
+ | MAE = 2.38
+VCA = meet
+ | MAE = 1.34
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.26
+VCA = teams
+ | MAE = 2.06
+VCA = meet
+ | MAE = 1.56
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 5.51
+VCA = webex
+ | MAE = 2.0
+VCA = meet
+ | MAE = 2.52
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 1.27
+VCA = webex
+ | MAE = 1.45
+VCA = teams
+ | MAE = 1.56
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 1.67
+VCA = teams
+ | MAE = 2.28
+VCA = webex
+ | MAE = 2.6
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.63
+VCA = teams
+ | MAE = 2.51
+VCA = meet
+ | MAE = 2.09
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.4
+VCA = teams
+ | MAE = 2.05
+VCA = meet
+ | MAE = 2.19
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 6.64
+VCA = webex
+ | MAE = 2.01
+VCA = meet
+ | MAE = 3.68
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 0.99
+VCA = webex
+ | MAE = 1.32
+VCA = teams
+ | MAE = 2.19
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 2.01
+VCA = teams
+ | MAE = 2.07
+VCA = webex
+ | MAE = 2.13
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.59
+VCA = teams
+ | MAE = 2.28
+VCA = meet
+ | MAE = 1.57
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.19
+VCA = teams
+ | MAE = 1.79
+VCA = meet
+ | MAE = 2.57
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 9.3
+VCA = webex
+ | MAE = 2.4
+VCA = meet
+ | MAE = 5.37
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 2.79
+VCA = webex
+ | MAE = 1.9
+VCA = teams
+ | MAE = 2.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 2.68
+VCA = teams
+ | MAE = 1.99
+VCA = webex
+ | MAE = 2.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 1.4
+VCA = teams
+ | MAE = 2.46
+VCA = meet
+ | MAE = 2.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.71
+VCA = teams
+ | MAE = 1.97
+VCA = meet
+ | MAE = 3.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 14.68
+VCA = webex
+ | MAE = 8.05
+VCA = meet
+ | MAE = 7.87
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 9250.72
+VCA = webex
+ | MAE = 14942.67
+VCA = teams
+ | MAE = 74573.72
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 30354.26
+VCA = teams
+ | MAE = 56743.25
+VCA = webex
+ | MAE = 46173.45
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 15662.14
+VCA = teams
+ | MAE = 41721.38
+VCA = meet
+ | MAE = 25081.01
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 30061.78
+VCA = teams
+ | MAE = 63164.89
+VCA = meet
+ | MAE = 15083.14
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 55091.04
+VCA = webex
+ | MAE = 18068.85
+VCA = meet
+ | MAE = 21497.8
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 9331.48
+VCA = webex
+ | MAE = 15082.12
+VCA = teams
+ | MAE = 63308.37
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 29078.7
+VCA = teams
+ | MAE = 54267.62
+VCA = webex
+ | MAE = 45197.79
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 15843.09
+VCA = teams
+ | MAE = 43469.36
+VCA = meet
+ | MAE = 23056.91
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 31343.97
+VCA = teams
+ | MAE = 62605.66
+VCA = meet
+ | MAE = 15010.08
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 60924.65
+VCA = webex
+ | MAE = 21322.1
+VCA = meet
+ | MAE = 21346.77
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 12637.9
+VCA = webex
+ | MAE = 22323.32
+VCA = teams
+ | MAE = 117682.64
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 28894.26
+VCA = teams
+ | MAE = 63126.13
+VCA = webex
+ | MAE = 46184.32
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 25765.98
+VCA = teams
+ | MAE = 49362.48
+VCA = meet
+ | MAE = 17466.1
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 32716.83
+VCA = teams
+ | MAE = 66290.36
+VCA = meet
+ | MAE = 18638.13
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 163011.86
+VCA = webex
+ | MAE = 37198.87
+VCA = meet
+ | MAE = 37588.25
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 12620.97
+VCA = webex
+ | MAE = 23267.53
+VCA = teams
+ | MAE = 124478.8
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 55883.52
+VCA = teams
+ | MAE = 60637.42
+VCA = webex
+ | MAE = 45423.53
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 26342.58
+VCA = teams
+ | MAE = 47430.82
+VCA = meet
+ | MAE = 36290.92
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 33647.44
+VCA = teams
+ | MAE = 64781.28
+VCA = meet
+ | MAE = 45371.02
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 115420.54
+VCA = webex
+ | MAE = 43018.22
+VCA = meet
+ | MAE = 68327.31
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 22.72
+VCA = webex
+ | MAE = 12.27
+VCA = teams
+ | MAE = 25.08
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 12.14
+VCA = teams
+ | MAE = 27.71
+VCA = webex
+ | MAE = 11.36
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 3.35
+VCA = teams
+ | MAE = 18.79
+VCA = meet
+ | MAE = 13.95
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 3.01
+VCA = teams
+ | MAE = 7.76
+VCA = meet
+ | MAE = 6.75
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 145.6
+VCA = webex
+ | MAE = 8.91
+VCA = meet
+ | MAE = 15.55
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 28.37
+VCA = webex
+ | MAE = 14.38
+VCA = teams
+ | MAE = 26.36
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 12.72
+VCA = teams
+ | MAE = 27.51
+VCA = webex
+ | MAE = 12.8
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 3.93
+VCA = teams
+ | MAE = 19.76
+VCA = meet
+ | MAE = 13.65
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 3.59
+VCA = teams
+ | MAE = 7.84
+VCA = meet
+ | MAE = 8.43
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 152.02
+VCA = webex
+ | MAE = 12.4
+VCA = meet
+ | MAE = 23.37
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 19.44
+VCA = webex
+ | MAE = 8.99
+VCA = teams
+ | MAE = 30.04
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 21.63
+VCA = teams
+ | MAE = 26.64
+VCA = webex
+ | MAE = 10.86
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 3.51
+VCA = teams
+ | MAE = 14.24
+VCA = meet
+ | MAE = 27.23
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 6.36
+VCA = teams
+ | MAE = 10.07
+VCA = meet
+ | MAE = 23.56
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 106.43
+VCA = webex
+ | MAE = 18.76
+VCA = meet
+ | MAE = 23.75
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 31.26
+VCA = webex
+ | MAE = 13.9
+VCA = teams
+ | MAE = 32.92
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 23.35
+VCA = teams
+ | MAE = 23.09
+VCA = webex
+ | MAE = 14.63
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 6.08
+VCA = teams
+ | MAE = 17.84
+VCA = meet
+ | MAE = 24.91
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 7.5
+VCA = teams
+ | MAE = 14.78
+VCA = meet
+ | MAE = 19.25
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 108.51
+VCA = webex
+ | MAE = 28.47
+VCA = meet
+ | MAE = 22.17
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | Acc = 97.79
+VCA = webex
+ | Acc = 100.0
+VCA = teams
+ | Acc = 71.86
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | Acc = 100.0
+VCA = teams
+ | Acc = 75.99
+VCA = webex
+ | Acc = 100.0
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | Acc = 100.0
+VCA = teams
+ | Acc = 66.6
+VCA = meet
+ | Acc = 76.56
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | Acc = 94.89
+VCA = teams
+ | Acc = 58.93
+VCA = meet
+ | Acc = 97.95
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | Acc = 65.21
+VCA = webex
+ | Acc = 100.0
+VCA = meet
+ | Acc = 93.52
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | Acc = 98.77
+VCA = webex
+ | Acc = 100.0
+VCA = teams
+ | Acc = 70.11
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | Acc = 99.73
+VCA = teams
+ | Acc = 75.21
+VCA = webex
+ | Acc = 100.0
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | Acc = 100.0
+VCA = teams
+ | Acc = 71.87
+VCA = meet
+ | Acc = 76.25
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | Acc = 94.9
+VCA = teams
+ | Acc = 58.59
+VCA = meet
+ | Acc = 98.23
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | Acc = 62.72
+VCA = webex
+ | Acc = 100.0
+VCA = meet
+ | Acc = 95.19
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 0.99
+VCA = webex
+ | MAE = 1.32
+VCA = teams
+ | MAE = 2.19
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 2.01
+VCA = teams
+ | MAE = 2.07
+VCA = webex
+ | MAE = 2.13
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 0.59
+VCA = teams
+ | MAE = 2.28
+VCA = meet
+ | MAE = 1.57
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.19
+VCA = teams
+ | MAE = 1.79
+VCA = meet
+ | MAE = 2.57
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 9.3
+VCA = webex
+ | MAE = 2.4
+VCA = meet
+ | MAE = 5.37
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 2.79
+VCA = webex
+ | MAE = 1.9
+VCA = teams
+ | MAE = 2.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 2.68
+VCA = teams
+ | MAE = 1.99
+VCA = webex
+ | MAE = 2.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 1.4
+VCA = teams
+ | MAE = 2.46
+VCA = meet
+ | MAE = 2.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.71
+VCA = teams
+ | MAE = 1.97
+VCA = meet
+ | MAE = 3.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 14.68
+VCA = webex
+ | MAE = 8.05
+VCA = meet
+ | MAE = 7.87
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 12637.9
+VCA = webex
+ | MAE = 22323.32
+VCA = teams
+ | MAE = 117682.64
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 28894.26
+VCA = teams
+ | MAE = 63126.13
+VCA = webex
+ | MAE = 46184.32
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 25765.98
+VCA = teams
+ | MAE = 49362.48
+VCA = meet
+ | MAE = 17466.1
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 32716.83
+VCA = teams
+ | MAE = 66290.36
+VCA = meet
+ | MAE = 18638.13
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 163011.86
+VCA = webex
+ | MAE = 37198.87
+VCA = meet
+ | MAE = 37588.25
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 12620.97
+VCA = webex
+ | MAE = 23267.53
+VCA = teams
+ | MAE = 124478.8
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 55883.52
+VCA = teams
+ | MAE = 60637.42
+VCA = webex
+ | MAE = 45423.53
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 26342.58
+VCA = teams
+ | MAE = 47430.82
+VCA = meet
+ | MAE = 36290.92
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 33647.44
+VCA = teams
+ | MAE = 64781.28
+VCA = meet
+ | MAE = 45371.02
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 115420.54
+VCA = webex
+ | MAE = 43018.22
+VCA = meet
+ | MAE = 68327.31
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 19.44
+VCA = webex
+ | MAE = 8.99
+VCA = teams
+ | MAE = 30.04
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 21.63
+VCA = teams
+ | MAE = 26.64
+VCA = webex
+ | MAE = 10.86
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 3.51
+VCA = teams
+ | MAE = 14.24
+VCA = meet
+ | MAE = 27.23
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 6.36
+VCA = teams
+ | MAE = 10.07
+VCA = meet
+ | MAE = 23.56
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 106.43
+VCA = webex
+ | MAE = 18.76
+VCA = meet
+ | MAE = 23.75
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 31.26
+VCA = webex
+ | MAE = 13.9
+VCA = teams
+ | MAE = 32.92
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 23.35
+VCA = teams
+ | MAE = 23.09
+VCA = webex
+ | MAE = 14.63
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 6.08
+VCA = teams
+ | MAE = 17.84
+VCA = meet
+ | MAE = 24.91
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 7.5
+VCA = teams
+ | MAE = 14.78
+VCA = meet
+ | MAE = 19.25
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 108.51
+VCA = webex
+ | MAE = 28.47
+VCA = meet
+ | MAE = 22.17
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_th_original
+VCA = meet
+ | MAE = 2.79
+VCA = webex
+ | MAE = 1.9
+VCA = teams
+ | MAE = 2.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_th_jitter_original
+VCA = meet
+ | MAE = 2.68
+VCA = teams
+ | MAE = 1.99
+VCA = webex
+ | MAE = 2.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_lat_original
+VCA = webex
+ | MAE = 1.4
+VCA = teams
+ | MAE = 2.46
+VCA = meet
+ | MAE = 2.51
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_lat_jitter_original
+VCA = webex
+ | MAE = 1.71
+VCA = teams
+ | MAE = 1.97
+VCA = meet
+ | MAE = 3.12
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_loss_original
+VCA = teams
+ | MAE = 14.68
+VCA = webex
+ | MAE = 8.05
+VCA = meet
+ | MAE = 7.87
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 0.85
+VCA = meet
+ | MAE = 0.77
+VCA = webex
+ | MAE = 0.82
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 0.79
+VCA = meet
+ | MAE = 0.71
+VCA = webex
+ | MAE = 0.79
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 0.9
+VCA = meet
+ | MAE = 0.77
+VCA = webex
+ | MAE = 0.87
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 0.86
+VCA = meet
+ | MAE = 0.73
+VCA = webex
+ | MAE = 0.84
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 0.97
+VCA = meet
+ | MAE = 0.78
+VCA = webex
+ | MAE = 0.91
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 1.01
+VCA = meet
+ | MAE = 0.82
+VCA = webex
+ | MAE = 0.96
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 1.04
+VCA = meet
+ | MAE = 0.83
+VCA = webex
+ | MAE = 0.98
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 1.07
+VCA = meet
+ | MAE = 0.88
+VCA = webex
+ | MAE = 0.99
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 1.23
+VCA = meet
+ | MAE = 1.03
+VCA = webex
+ | MAE = 1.09
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_window_size
+VCA = teams
+ | MAE = 1.6
+VCA = meet
+ | MAE = 1.58
+VCA = webex
+ | MAE = 1.32
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.89
+VCA = meet
+ | MAE = 2.83
+VCA = webex
+ | MAE = 1.75
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.07
+VCA = meet
+ | MAE = 2.77
+VCA = webex
+ | MAE = 1.72
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.35
+VCA = meet
+ | MAE = 1.54
+VCA = webex
+ | MAE = 1.71
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65714.47
+VCA = meet
+ | MAE = 30296.53
+VCA = webex
+ | MAE = 23921.18
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 30.46
+VCA = meet
+ | MAE = 27.7
+VCA = webex
+ | MAE = 26.24
+************************************************************************************************************************
+Model = framesReceivedPerSecond_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 2.36
+VCA = meet
+ | MAE = 1.54
+VCA = webex
+ | MAE = 1.72
+************************************************************************************************************************
+Model = bitrate_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65226.35
+VCA = meet
+ | MAE = 29967.41
+VCA = webex
+ | MAE = 23985.98
+************************************************************************************************************************
+Model = frame_jitter_frame-lookback_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 36.88
+VCA = meet
+ | MAE = 35.25
+VCA = webex
+ | MAE = 27.59
+************************************************************************************************************************
+Model = framesReceivedPerSecond_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.7
+VCA = meet
+ | MAE = 1.34
+VCA = webex
+ | MAE = 1.32
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.57
+VCA = meet
+ | MAE = 1.19
+VCA = webex
+ | MAE = 1.23
+************************************************************************************************************************
+Model = framesReceivedPerSecond_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 1.81
+VCA = meet
+ | MAE = 1.58
+VCA = webex
+ | MAE = 1.1
+************************************************************************************************************************
+Model = bitrate_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43630.69
+VCA = meet
+ | MAE = 9765.5
+VCA = webex
+ | MAE = 16048.08
+************************************************************************************************************************
+Model = bitrate_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 43117.97
+VCA = meet
+ | MAE = 9296.31
+VCA = webex
+ | MAE = 15992.71
+************************************************************************************************************************
+Model = bitrate_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 65075.61
+VCA = meet
+ | MAE = 14163.52
+VCA = webex
+ | MAE = 23649.83
+************************************************************************************************************************
+Model = frame_jitter_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 31.21
+VCA = meet
+ | MAE = 23.76
+VCA = webex
+ | MAE = 38.23
+************************************************************************************************************************
+Model = frame_jitter_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.29
+VCA = meet
+ | MAE = 22.89
+VCA = webex
+ | MAE = 35.0
+************************************************************************************************************************
+Model = frame_jitter_rtp_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | MAE = 28.27
+VCA = meet
+ | MAE = 28.37
+VCA = webex
+ | MAE = 23.28
+************************************************************************************************************************
+Model = frameHeight_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 53.28
+VCA = meet
+ | Acc = 97.74
+VCA = webex
+ | Acc = 99.3
+************************************************************************************************************************
+Model = frameHeight_rtp_ml_LSTATS-TSTATS_rf_IMC_Lab_data_original
+VCA = teams
+ | Acc = 52.52
+VCA = meet
+ | Acc = 97.87
+VCA = webex
+ | Acc = 99.31

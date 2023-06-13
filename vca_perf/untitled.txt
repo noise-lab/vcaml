@@ -1,0 +1,5 @@
+scp cornflower:~/Documents/Projects/vca-qoe-inference/vca_perf/analysis/paper_plots/\*_error_boxplot_imc_lab.pdf ~/Documents/latex-projects/2023.xxx.vca-qoe-inference/figures/evaluation/lab
+
+scp cornflower:~/Documents/Projects/vca-qoe-inference/vca_perf/analysis/paper_plots/frame_jitter_ip_udp_ml.pdf ~/Documents/latex-projects/2023.xxx.vca-qoe-inference/figures/evaluation/lab
+
+scp cornflower:~/Documents/Projects/vca-qoe-inference/vca_perf/analysis/paper_plots/\*_feature_importance_imc_lab.pdf ~/Documents/latex-projects/2023.xxx.vca-qoe-inference/figures/evaluation/lab
