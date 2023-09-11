@@ -1,0 +1,26 @@
+[default]
+vca="teams"
+capture=true
+datapath="Data/"
+virtual=true
+
+
+[platform]
+#browserpath="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+browserpath="chromium-browser"
+#ctl_key="command"
+ctl_key="ctrl"
+
+[capture]
+filter=""
+
+[call]
+virtual_display=false
+duration=15
+automation_image_dir="autogui_images"
+
+[teams]
+url="https://teams.microsoft.com/l/meetup-join/19%3aEgYoN7zY4kMkm0ymslaP8TCxsOM0NS_VTYVCAZYV7bE1%40thread.tacv2/1669956304023?context=%7b%22Tid%22%3a%2283b02c92-5f26-48ed-9e5b-6c2fca46a8e6%22%2c%22Oid%22%3a%22faf6a72a-f103-4a0c-a27d-c0aa41712a31%22%7d"
+
+[meet]
+url="https://meet.google.com/dvd-cwan-wkt"
