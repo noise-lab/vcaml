@@ -88,7 +88,7 @@ class FileProcessor:
                 webrtc_path = f'{experiment_dir}/{vca}/webrtc'
                 annotated_fps_path = f'{experiment_dir}/{vca}/rec'
 
-                convert(csv_path)
+                # convert(csv_path)
 
                 trace_id = os.path.basename(experiment_dir).split('_')[-1]
 
@@ -140,7 +140,7 @@ class FileProcessor:
             dpath = f'{self.data_directory}/{device}/extract/tmp/Data'
             if os.path.exists(dpath):
                 for vca in os.listdir(dpath):
-                    convert(f'{dpath}/{vca}')
+                    # convert(f'{dpath}/{vca}')
                     if vca not in linked_files:
                         linked_files[vca] = []
                     pcaps = glob(f'{dpath}/{vca}/*.pcap')

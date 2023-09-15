@@ -17,6 +17,10 @@ from pathlib import Path
 import pandas as pd
 from datetime import datetime as dt
 from itertools import product
+from util.data_splitter import KfoldCVOverFiles
+from util.file_processor import FileValidator
+from util.file_processor import FileProcessor
+from collections import defaultdict
 
 class ModelRunner:
 
@@ -40,8 +44,6 @@ class ModelRunner:
         self.cv_index = cv_index
         
         self.model = None
-        path = Path(self.intermediates_dir)
-        path.mkdir(parents=True, exist_ok=True)
 
     def save_intermediate(self, data_object, pickle_filename):
         pickle_filename = f'{self.trial_id}_{pickle_filename}'
@@ -96,7 +98,7 @@ class ModelRunner:
             elif self.estimation_method == 'rtp-heuristic':
                 model = RTP_Heuristic(vca=vca, metric=self.metric, config=project_config, dataset=bname)
             vca_model[vca] = model
-        self.save_intermediate(vca_model, 'vca_model')
+        # self.save_intermediate(vca_model, 'vca_model')
         return vca_model
 
     def get_test_set_predictions(self, split_files, vca_model):
@@ -146,8 +148,9 @@ class ModelRunner:
             line = f'{dt.now()}\tVCA: {vca} || Experiment : {self.trial_id} || MAE_avg = {mae_avg} {accuracy_str}\n'
             with open('log.txt', 'a') as fd:
                 fd.write(line)
-        self.save_intermediate(predictions, 'predictions')
+        # self.save_intermediate(predictions, 'predictions')
         return predictions
+
 
 if __name__ == '__main__':
 
@@ -156,10 +159,32 @@ if __name__ == '__main__':
     metrics = ['framesReceivedPerSecond', 'bitrate', 'frame_jitter', 'frameHeight']  # what to predict
     estimation_methods = ['ip-udp-heuristic', 'rtp-heuristic', 'ip-udp-ml', 'rtp-ml']  # how to predict
     feature_subsets = [['LSTATS', 'TSTATS']] # groups of features as per `features.feature_extraction.py`
-    data_dir = '../data/raw/IMC_Lab_Data'
+    data_dir = ['/home/taveesh/Documents/vcaml/data/IMC_Lab_data']
+    
+    bname = os.path.basename(data_dir[0])
+    
+    fp = FileProcessor(data_directory=data_dir[0], data_format=project_config['data_format'][bname])
+    file_dict = fp.get_linked_files()
+
+    kcv = KfoldCVOverFiles(5, file_dict, project_config, bname)
+    file_splits = kcv.split()
+
+    vca_preds = defaultdict(list)
 
     param_list = [metrics, estimation_methods, feature_subsets, data_dir]
     for metric, estimation_method, feature_subset, data_dir in product(*param_list):
         if metric == 'frameHeight' and 'heuristic' in estimation_method:
             continue
+        models = []
         cv_idx = 1
+        print('ddir', data_dir)
+        for fsp in file_splits:
+            model_runner = ModelRunner(metric, estimation_method, feature_subset, data_dir, cv_idx)
+            vca_model = model_runner.train_model(fsp)
+            predictions = model_runner.get_test_set_predictions(fsp, vca_model)
+            models.append(vca_model)
+
+            for vca in predictions:
+                vca_preds[vca].append(pd.concat(predictions[vca], axis=0))
+        
+            cv_idx += 1
