@@ -28,7 +28,7 @@ If you intend to use your own traces, place your files under `data/` with the sa
 
 To train and evaluate models, refer to [run_model.py](src/models/run_model.py). Modify the below part of the code according to your requirements.
 
-```
+```python
 if __name__ == '__main__':
 
     metrics = ['framesReceivedPerSecond', 'bitrate',
