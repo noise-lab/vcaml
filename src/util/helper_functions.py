@@ -42,11 +42,11 @@ def filter_video_frames_rtp(pcap, vca):
 
 def read_net_file(dataset, filename):
     csv_columns = ['frame.time_relative', 'frame.time_epoch', 'ip.src', 'ip.dst', 'ip.proto', 'ip.len', 'udp.srcport', 'udp.dstport', 'udp.length', 'rtp.ssrc', 'rtp.timestamp', 'rtp.seq', 'rtp.p_type', 'rtp.marker']
-    df_net = pd.read_csv(filename, header=None, sep='\t',
-                         names=csv_columns, lineterminator='\n', encoding='ascii')
-    ip_addr = project_config['destination_ip'][dataset]
-    if ip_addr == 'dynamic':
+    df_net = pd.read_csv(filename)
+    try:
         ip_addr = df_net.groupby('ip.dst').agg({'udp.length': sum}).reset_index().sort_values(by='udp.length', ascending=False).head(1)['ip.dst'].iloc[0]
+    except IndexError:
+        return
     df_net = df_net[(df_net["ip.dst"] == ip_addr) & (~pd.isna(df_net["rtp.ssrc"]))]
     df_net = df_net[~df_net['ip.proto'].isna()]
     df_net['rtp.p_type'] = df_net['rtp.p_type'].apply(filter_ptype)

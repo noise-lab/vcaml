@@ -1,8 +1,7 @@
-# Automating Video Confrencing Calls
+# Automating Video Conferencing Calls
 
 This tool automates UChicago Zoom calls and all google meet calls. Users can 
-capture network traffic during calls using command line options. Other services
-(Cisco WebEX) will be added in the future. 
+capture network traffic during calls using command line options.
 
 ## Dependencies
 

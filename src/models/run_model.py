@@ -1,26 +1,25 @@
+from collections import defaultdict
+from itertools import product
+from datetime import datetime as dt
+import pandas as pd
+from pathlib import Path
+from sklearn.metrics import mean_absolute_error, accuracy_score
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
+from config import project_config
+import pickle
+import os
 import time
 import sys
 from os.path import dirname, abspath
 d = dirname(dirname(abspath(__file__)))
 sys.path.append(d)
-
-import os
-import pickle
-from config import project_config
-from models.ip_udp_heuristic import IP_UDP_Heuristic
-from models.ip_udp_ml import IP_UDP_ML
-from models.rtp_heuristic import RTP_Heuristic
-from models.rtp_ml import RTP_ML
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from sklearn.metrics import mean_absolute_error, accuracy_score
-from pathlib import Path
-import pandas as pd
-from datetime import datetime as dt
-from itertools import product
-from util.data_splitter import KfoldCVOverFiles
-from util.file_processor import FileValidator
 from util.file_processor import FileProcessor
-from collections import defaultdict
+from util.file_processor import FileValidator
+from util.data_splitter import KfoldCVOverFiles
+from models.rtp_ml import RTP_ML
+from models.rtp_heuristic import RTP_Heuristic
+from models.ip_udp_ml import IP_UDP_ML
+from models.ip_udp_heuristic import IP_UDP_Heuristic
 
 class ModelRunner:
 
@@ -37,12 +36,13 @@ class ModelRunner:
             feature_subset_tag = 'none'
 
         data_bname = os.path.basename(data_dir)
-        self.trial_id = '_'.join([metric, estimation_method, feature_subset_tag, data_bname])
+        self.trial_id = '_'.join(
+            [metric, estimation_method, feature_subset_tag, data_bname, f'cv_{cv_index}'])
 
         self.intermediates_dir = f'{self.data_dir}_intermediates/{self.trial_id}'
 
         self.cv_index = cv_index
-        
+
         self.model = None
 
     def save_intermediate(self, data_object, pickle_filename):
@@ -69,7 +69,8 @@ class ModelRunner:
         for vca in split_files:
             print(f'\nVCA = {vca}')
             if self.estimation_method == 'ip-udp-ml':
-                estimator = RandomForestClassifier() if self.metric == 'frameHeight' else RandomForestRegressor()
+                estimator = RandomForestClassifier(
+                ) if self.metric == 'frameHeight' else RandomForestRegressor()
                 model = IP_UDP_ML(
                     vca=vca,
                     feature_subset=self.feature_subset,
@@ -81,7 +82,8 @@ class ModelRunner:
                 model.train(split_files[vca]['train'])
 
             elif self.estimation_method == 'rtp-ml':
-                estimator = RandomForestClassifier() if self.metric == 'frameHeight' else RandomForestRegressor()
+                estimator = RandomForestClassifier(
+                ) if self.metric == 'frameHeight' else RandomForestRegressor()
                 model = RTP_ML(
                     vca=vca,
                     feature_subset=self.feature_subset,
@@ -93,10 +95,12 @@ class ModelRunner:
                 model.train(split_files[vca]['train'])
 
             elif self.estimation_method == 'ip-udp-heuristic':
-                model = IP_UDP_Heuristic(vca=vca, metric=self.metric, config=project_config, dataset=bname)
+                model = IP_UDP_Heuristic(
+                    vca=vca, metric=self.metric, config=project_config, dataset=bname)
 
             elif self.estimation_method == 'rtp-heuristic':
-                model = RTP_Heuristic(vca=vca, metric=self.metric, config=project_config, dataset=bname)
+                model = RTP_Heuristic(
+                    vca=vca, metric=self.metric, config=project_config, dataset=bname)
             vca_model[vca] = model
         # self.save_intermediate(vca_model, 'vca_model')
         return vca_model
@@ -122,16 +126,19 @@ class ModelRunner:
                     predictions[vca].append(output)
                     continue
                 if self.metric != 'frameHeight':
-                    mae = mean_absolute_error(output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
+                    mae = mean_absolute_error(
+                        output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
                 if self.metric == 'framesPerSecond' or self.metric == 'framesReceived' or self.metric == 'framesReceivedPerSecond' or self.metric == 'framesDecodedPerSecond' or self.metric == 'framesRendered':
-                    acc = self.fps_prediction_accuracy(output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
+                    acc = self.fps_prediction_accuracy(
+                        output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
                     accs[vca].append(acc)
                     print(f'Accuracy = {round(acc, 2)}')
                 if self.metric != 'frameHeight':
                     print(f'MAE = {round(mae, 2)}')
                     maes[vca].append(mae)
                 else:
-                    a = accuracy_score(output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
+                    a = accuracy_score(
+                        output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
                     print(f'Accuracy = {round(a, 2)}')
                     accs[vca].append(a)
                 idx += 1
@@ -156,15 +163,21 @@ if __name__ == '__main__':
 
     # Example usage
 
-    metrics = ['framesReceivedPerSecond', 'bitrate', 'frame_jitter', 'frameHeight']  # what to predict
-    estimation_methods = ['ip-udp-heuristic', 'rtp-heuristic', 'ip-udp-ml', 'rtp-ml']  # how to predict
-    feature_subsets = [['LSTATS', 'TSTATS']] # groups of features as per `features.feature_extraction.py`
-    data_dir = ['/home/taveesh/Documents/vcaml/data/IMC_Lab_data']
-    
+    metrics = ['framesReceivedPerSecond', 'bitrate',
+               'frame_jitter', 'frameHeight']  # what to predict
+    estimation_methods = ['ip-udp-ml']  # how to predict
+    # groups of features as per `features.feature_extraction.py`
+    feature_subsets = [['LSTATS', 'TSTATS']]
+    data_dir = ['/home/taveesh/Documents/vcaml/data/hashed_real_world']
+
     bname = os.path.basename(data_dir[0])
-    
-    fp = FileProcessor(data_directory=data_dir[0], data_format=project_config['data_format'][bname])
+
+    # Get a list of pairs (trace_csv_file, ground_truth)
+
+    fp = FileProcessor(data_directory=data_dir[0])
     file_dict = fp.get_linked_files()
+
+    # Create 5-fold cross validation splits and validate files. Refer `util/validator.py` for more details
 
     kcv = KfoldCVOverFiles(5, file_dict, project_config, bname)
     file_splits = kcv.split()
@@ -172,19 +185,22 @@ if __name__ == '__main__':
     vca_preds = defaultdict(list)
 
     param_list = [metrics, estimation_methods, feature_subsets, data_dir]
+
+    # Run models over 5 cross validations
+
     for metric, estimation_method, feature_subset, data_dir in product(*param_list):
         if metric == 'frameHeight' and 'heuristic' in estimation_method:
             continue
         models = []
         cv_idx = 1
-        print('ddir', data_dir)
         for fsp in file_splits:
-            model_runner = ModelRunner(metric, estimation_method, feature_subset, data_dir, cv_idx)
+            model_runner = ModelRunner(
+                metric, estimation_method, feature_subset, data_dir, cv_idx)
             vca_model = model_runner.train_model(fsp)
             predictions = model_runner.get_test_set_predictions(fsp, vca_model)
             models.append(vca_model)
 
             for vca in predictions:
                 vca_preds[vca].append(pd.concat(predictions[vca], axis=0))
-        
+
             cv_idx += 1

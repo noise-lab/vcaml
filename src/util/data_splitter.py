@@ -30,7 +30,8 @@ class DataSplitter:
                 filtered_files[vca] = []
             for pcap_file, csv_file, webrtc_file in self.file_dict[vca]:
                 print(pcap_file)
-                validator = FileValidator(file_tuple = (pcap_file, csv_file, webrtc_file), config=self.config, dataset=self.dataset)
+                validator = FileValidator(file_tuple=(
+                    pcap_file, csv_file, webrtc_file), config=self.config, dataset=self.dataset)
                 if validator.validate():
                     filtered_files[vca].append(
                         (pcap_file, csv_file, webrtc_file))
@@ -85,9 +86,10 @@ class NetworkConditionSplitCriterion:
                 bname = bname.split('-')[2]
                 bname = '_'.join(bname.split('_')[:5])
                 net_cond_strs.add(bname)
-            
+
             for net_cond in net_cond_strs:
-                tups = [x for x in self.file_dict[vca] if 'chrome-'+net_cond in x[1]]
+                tups = [x for x in self.file_dict[vca]
+                        if 'chrome-'+net_cond in x[1]]
                 n = len(tups)
                 num_samples = int(self.split_ratio*n)
                 splits[0][vca]['train'] += tups[:num_samples]
@@ -136,11 +138,10 @@ class KfoldCVOverFiles:
             if vca not in filtered_files:
                 filtered_files[vca] = []
             for file_tuple in self.file_dict[vca]:
-                pcap_file = file_tuple[0]
-                csv_file = file_tuple[1]
-                webrtc_file = file_tuple[2]
-                print(pcap_file)
-                validator = FileValidator(file_tuple = file_tuple, config=self.config, dataset=self.dataset)
+                csv_file = file_tuple[0]
+                webrtc_file = file_tuple[1]
+                validator = FileValidator(
+                    file_tuple=file_tuple, config=self.config, dataset=self.dataset)
                 if validator.validate():
                     filtered_files[vca].append(file_tuple)
         return filtered_files
@@ -157,6 +158,7 @@ class KfoldCVOverFiles:
                 X_train, X_test = list(X[train_index]), list(X[test_index])
                 cross_validation_splits[idx-1][vca]['train'] = X_train
                 cross_validation_splits[idx-1][vca]['test'] = X_test
-                print(f'\nSplit # {idx} | VCA = {vca} | n_files_train = {len(X_train)} | n_files_test = {len(X_test)}\n')
+                print(
+                    f'\nSplit # {idx} | VCA = {vca} | n_files_train = {len(X_train)} | n_files_test = {len(X_test)}\n')
                 idx += 1
         return cross_validation_splits

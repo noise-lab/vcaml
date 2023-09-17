@@ -14,15 +14,11 @@ class FileValidator:
         self.dataset = dataset
 
     def validate(self):
-        csv_file = self.file_tuple[1]
-        webrtc_file = self.file_tuple[2]
-        df_net = pd.read_csv(csv_file, header=None, sep='\t',
-                             names=self.net_columns, lineterminator='\n', encoding='ascii')
-        ip_addr = self.config['destination_ip'][self.dataset]
-        if ip_addr == 'dynamic':
-            ip_addr = df_net.groupby('ip.dst').agg({'udp.length': sum}).reset_index(
-            ).sort_values(by='udp.length', ascending=False).head(1)['ip.dst'].iloc[0]
-            print(ip_addr)
+        csv_file = self.file_tuple[0]
+        webrtc_file = self.file_tuple[1]
+        print(f'Validating {csv_file} and {webrtc_file}')
+        df_net = pd.read_csv(csv_file)
+        ip_addr = df_net.groupby('ip.dst').agg({'udp.length': sum}).reset_index().sort_values(by='udp.length', ascending=False).head(1)['ip.dst'].iloc[0]
         df_net = df_net[(df_net["ip.dst"] == ip_addr) &
                         (~pd.isna(df_net["rtp.ssrc"]))]
         df_net['rtp.p_type'] = df_net['rtp.p_type'].apply(filter_ptype)
@@ -30,7 +26,11 @@ class FileValidator:
         df_net['ip.proto'] = df_net['ip.proto'].astype(str)
         df_net = df_net[df_net['ip.proto'].str.contains(',') == False]
         df_net = df_net[~df_net['ip.proto'].isna()]
-        df_net['ip.proto'] = df_net['ip.proto'].apply(lambda x: int(float(x)))
+        try:
+            df_net['ip.proto'] = df_net['ip.proto'].apply(lambda x: int(float(x)))
+        except ValueError:
+            print('Malformed PCAP..')
+            return False
         df_video = df_net[(df_net['ip.proto'] == 17) & (
             df_net['ip.dst'] == ip_addr) & (df_net['udp.length'] > 306)]
         if len(df_video) == 0:
@@ -59,19 +59,6 @@ class FileValidator:
         if webrtc_max_time < pcap_min_time or pcap_max_time < webrtc_min_time:
             print(f'Timestamps do not align : {csv_file} {webrtc_file}')
             return False
-
-        # Dataset Specific Validations
-
-        if self.dataset == '13May':
-            logFile = self.file_tuple[3]
-            with open(logFile, 'r') as fd:
-                for line in fd.readlines():
-                    if 'capture summary' in line:
-                        idx = line.find('{')
-                        d = ast.literal_eval(line[idx:])
-                        if len(d) == 0 or d['dropped'] > 0:
-                            return False
-        print(int(df_webrtc['duration'].max()), df_webrtc['num_vals'].max())
 
         # If duration for webrtc logs exceeds the number of FPS samples, invalidate
 
