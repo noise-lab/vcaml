@@ -1,7 +1,7 @@
 vcaml
 ==============================
 
-A end-to-end pipeline designed to estimate QoE for WebRTC-based video conferencing applications (VCAs) without using application layer headers.
+An end-to-end pipeline designed to estimate QoE for WebRTC-based video conferencing applications (VCAs) without using application layer headers.
 
 # 1. Download Datasets
 
@@ -82,7 +82,6 @@ While the models run, a file `log.txt` is created to track the progress. An exam
 2023-09-16 14:09:14.841556	VCA: webex || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_1 || MAE_avg = 0.85 || Accuracy_avg = 90.9
 2023-09-16 14:13:23.324799	VCA: teams || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_2 || MAE_avg = 1.83 || Accuracy_avg = 82.06
 2023-09-16 14:13:23.324886	VCA: meet || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_2 || MAE_avg = 1.36 || Accuracy_avg = 86.45
-2023-09-16 14:13:23.324938	VCA: webex || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_2 || MAE_avg = 1.37 |
 ```
 
 # 6. Cite our work
