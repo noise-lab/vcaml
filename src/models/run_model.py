@@ -165,12 +165,17 @@ if __name__ == '__main__':
 
     metrics = ['framesReceivedPerSecond', 'bitrate',
                'frame_jitter', 'frameHeight']  # what to predict
-    estimation_methods = ['ip-udp-ml']  # how to predict
+    estimation_methods = ['ip-udp-heuristic', 'rtp-heuristic', 'ip-udp-ml', 'rtp-ml']  # how to predict
     # groups of features as per `features.feature_extraction.py`
     feature_subsets = [['LSTATS', 'TSTATS']]
-    data_dir = ['/home/taveesh/Documents/vcaml/data/hashed_real_world']
+    data_dir = ['/home/taveesh/Documents/vcaml/data/in_lab_data']
 
     bname = os.path.basename(data_dir[0])
+
+    # Create a directory for saving model intermediates
+    intermediates_dir = f'{data_dir[0]}_intermediates'
+
+    Path(intermediates_dir).mkdir(exist_ok=True, parents=True)
 
     # Get a list of pairs (trace_csv_file, ground_truth)
 
@@ -181,6 +186,9 @@ if __name__ == '__main__':
 
     kcv = KfoldCVOverFiles(5, file_dict, project_config, bname)
     file_splits = kcv.split()
+
+    with open(f'{intermediates_dir}/cv_splits.pkl', 'wb') as fd:
+        pickle.dump(file_splits, fd)
 
     vca_preds = defaultdict(list)
 
@@ -197,10 +205,14 @@ if __name__ == '__main__':
             model_runner = ModelRunner(
                 metric, estimation_method, feature_subset, data_dir, cv_idx)
             vca_model = model_runner.train_model(fsp)
+            Path(f'{intermediates_dir}/{model_runner.trial_id}').mkdir(exist_ok=True, parents=True)
             predictions = model_runner.get_test_set_predictions(fsp, vca_model)
             models.append(vca_model)
-
+            with open(f'{intermediates_dir}/{model_runner.trial_id}/model.pkl', 'wb') as fd:
+                pickle.dump(vca_model, fd)
             for vca in predictions:
-                vca_preds[vca].append(pd.concat(predictions[vca], axis=0))
-
+                preds = pd.concat(predictions[vca], axis=0)
+                vca_preds[vca].append(preds)
+                with open(f'{intermediates_dir}/{model_runner.trial_id}/predictions_{vca}.pkl', 'wb') as fd:
+                    pickle.dump(preds, fd)
             cv_idx += 1

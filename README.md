@@ -16,7 +16,7 @@ An end-to-end pipeline designed to estimate QoE for WebRTC-based video conferenc
 
 # 3. Collect Additional Data
 
-Refer to [In-Lab](src/data/in-lab) and [Real-World](src/data/real-world) for more details.
+Refer to [In-Lab Data Collection](src/data/in-lab) and [Real-World Data Collection](src/data/real-world) for more details.
 
 # 4. Prepare Inference pipeline
 
@@ -26,7 +26,34 @@ If you intend to use your own traces, place your files under `data/` with the sa
 
 # 5. Train and test models
 
-To train and evaluate models, refer to [run_model.py](src/models/run_model.py). Modify the below part of the code according to your requirements.
+If you want to conduct an independent analysis on our trained models, refer to the below links. These contain our model intermediates. Place them in `data/`. Then run the [notebooks](notebooks/) straight away.
+
+- [In-lab Model Intermediates](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing)
+- [Real-world Model Intermediates](https://drive.google.com/file/d/1vnLC1Sw-v_ARnf9rePOqUcOR15DjNTgA/view?usp=sharing)
+
+An example directory structure for [In-lab Model Intermediates](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing) is shown as under:
+
+```
+vcaml/data/in_lab_data_intermediates  
+├── cv_splits.pkl  --> A dictionary that stores the cross validation splits
+├── framesReceivedPerSecond_ip-udp-heuristic_LSTATS-TSTATS_in_lab_data_cv_1
+│   ├── model.pkl  --> A dictionary for each VCA for a single cross validation
+│   ├── predictions_meet.pkl  --> Predictions for a single VCA
+│   ├── predictions_teams.pkl
+│   └── predictions_webex.pkl
+├── framesReceivedPerSecond_ip-udp-heuristic_LSTATS-TSTATS_in_lab_data_cv_2
+│   ├── model.pkl
+│   ├── predictions_meet.pkl
+│   ├── predictions_teams.pkl
+│   └── predictions_webex.pkl
+├── framesReceivedPerSecond_ip-udp-heuristic_LSTATS-TSTATS_in_lab_data_cv_3
+│   ├── model.pkl
+│   ├── predictions_meet.pkl
+│   ├── predictions_teams.pkl
+│   └── predictions_webex.pkl
+```
+
+To train and evaluate models from scratch, refer to [run_model.py](src/models/run_model.py). Modify the below part of the code according to your requirements.
 
 ```python
 if __name__ == '__main__':
