@@ -114,12 +114,20 @@ While the models run, a file `log.txt` is created to track the progress. An exam
 # 6. Cite our work
 
 ```
-@misc{sharma2023estimating,
-      title={Estimating WebRTC Video QoE Metrics Without Using Application Headers}, 
-      author={Taveesh Sharma and Tarun Mangla and Arpit Gupta and Junchen Jiang and Nick Feamster},
-      year={2023},
-      eprint={2306.01194},
-      archivePrefix={arXiv},
-      primaryClass={cs.NI}
+@inproceedings{10.1145/3618257.3624828,
+    author = {Sharma, Taveesh and Mangla, Tarun and Gupta, Arpit and Jiang, Junchen and Feamster, Nick},
+    title = {Estimating WebRTC Video QoE Metrics Without Using Application Headers},
+    year = {2023},
+    isbn = {9798400703829},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3618257.3624828},
+    doi = {10.1145/3618257.3624828},
+    booktitle = {Proceedings of the 2023 ACM on Internet Measurement Conference},
+    pages = {485–500},
+    numpages = {16},
+    keywords = {machine learning, access networks, quality of experience, video conferencing},
+    location = {Montreal QC, Canada},
+    series = {IMC '23}
 }
 ```
