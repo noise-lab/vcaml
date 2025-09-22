@@ -1,0 +1,31 @@
+prediction_window: 1.0
+
+n_features_size:
+  teams: 800
+  meet: 600
+  webex: 600
+
+n_features_iat:
+  teams: 800
+  meet: 600
+  webex: 600
+
+video_ptype:
+  lab:
+    teams: ["102"]
+    meet: ["96", "98"]
+    webex: ["102"]
+  real:
+    teams: ["100"]
+    meet: ["98"]
+    webex: ["100"]
+
+rtx_ptype:
+  lab:
+    teams: ["103"]
+    meet: ["99"]
+    webex: [null]
+  real:
+    teams: ["101"]
+    meet: ["99"]
+    webex: [null]

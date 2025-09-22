@@ -88,3 +88,8 @@ target/
 
 # Mypy cache
 .mypy_cache/
+
+.venv/
+
+.pytest_cache/
+.python-version
