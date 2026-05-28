@@ -1,0 +1,26 @@
+[project]
+name = "vcaml"
+version = "0.1.0"
+description = "WebRTC video QoE estimation from network traffic (IMC 2023)"
+requires-python = ">=3.11"
+dependencies = [
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "scikit-learn>=1.5",
+    "scipy>=1.14",
+    "matplotlib>=3.9",
+    "seaborn>=0.13",
+    "requests>=2.32",
+    "python-dateutil>=2.9",
+    "PyYAML>=6.0",
+]
+
+[dependency-groups]
+notebooks = [
+    "jupyterlab>=4.4",
+    "ipykernel>=6.29",
+    "graphviz>=0.20",
+]
+
+[tool.uv]
+default-groups = ["notebooks"]

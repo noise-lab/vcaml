@@ -1,137 +1,152 @@
-import pandas as pd
-import json
-import re
 import ast
-import numpy as np
-import dateutil.parser
-from datetime import datetime
+import json
+import logging
+import re
 import sys
-from os.path import dirname, abspath
+from datetime import datetime
+from os.path import abspath, dirname
+
+import dateutil.parser
+import numpy as np
+import pandas as pd
+
 d = dirname(dirname(abspath(__file__)))
 sys.path.append(d)
-from config import project_config
+
+logger = logging.getLogger(__name__)
+
 
 class WebRTCReader:
-    def __init__(self, webrtc_file, dataset):
-        self.webrtc_file = webrtc_file
+
+    # Cumulative stats that must be differenced to get per-second values
+    _CUM_STATS = frozenset({
+        'freezeCount*', 'totalFreezesDuration*', 'totalFramesDuration*',
+        'framesReceived', 'pauseCount*', 'totalPausesDuration*',
+        'jitterBufferDelay', 'jitterBufferEmittedCount', 'qpSum',
+    })
+
+    _WANTED_STATS = {
+        'IT01V': [
+            'ssrc', 'lastPacketReceivedTimestamp', 'framesPerSecond',
+            '[bytesReceived_in_bits/s]', '[codec]', 'packetsLost', 'framesDropped',
+            'framesReceived', '[framesReceived/s]', '[interFrameDelayStDev_in_ms]',
+            'nackCount', 'packetsReceived', 'trackIdentifier', 'freezeCount',
+            'totalFreezesDuration', 'pauseCount', 'totalPausesDuration',
+            'jitterBufferDelay', '[framesDecoded/s]', 'jitterBufferEmittedCount',
+            'frameHeight', 'qpSum',
+        ]
+    }
+
+    _RENAME_COLS = {
+        '[framesReceived/s]': 'framesReceivedPerSecond',
+        '[framesDecoded/s]': 'framesDecodedPerSecond',
+        '[bytesReceived_in_bits/s]': 'bitrate',
+        '[interFrameDelayStDev_in_ms]': 'frame_jitter',
+    }
+
+    def __init__(self, webrtcFile, dataset):
+        self.webrtcFile = webrtcFile
         self.dataset = dataset
-        self.wanted_stats = {"IT01V": ["ssrc", "lastPacketReceivedTimestamp",
-                                       "framesPerSecond", "[bytesReceived_in_bits/s]", "[codec]", "packetsLost",
-                                       "framesDropped", "framesReceived", "[framesReceived/s]", "[interFrameDelayStDev_in_ms]", "nackCount", "packetsReceived", "trackIdentifier", "freezeCount", "totalFreezesDuration", "pauseCount", "totalPausesDuration", "jitterBufferDelay", "[framesDecoded/s]", "jitterBufferEmittedCount", "frameHeight", "qpSum"]}
 
-        self.cum_stat_list = ["freezeCount*", "totalFreezesDuration*", "totalFramesDuration*", "framesReceived",
-                              "pauseCount*", "totalPausesDuration*", "jitterBufferDelay", "jitterBufferEmittedCount", "qpSum"]
+    # ------------------------------------------------------------------ helpers
 
-    def get_most_active(self, webrtc_stats, id_list):
-        stat_temp = "IT01V%s-framesPerSecond"
-        valid_id_list = [id_list[i] for i in range(
-            len(id_list)) if stat_temp % id_list[i] in webrtc_stats]
-        sum_list = [sum(ast.literal_eval(webrtc_stats[stat_temp %
-                        ssrc_id]["values"])) for ssrc_id in valid_id_list]
-        if len(sum_list) == 0:
+    def _isCumStat(self, statName: str) -> bool:
+        return any('-' + cs in statName for cs in self._CUM_STATS)
+
+    def _getActiveStreamIds(self, webrtcStats: dict, prefix: str) -> list:
+        seen = {}
+        for key in webrtcStats:
+            m = re.search(f'{prefix}(\\d+)-', key)
+            if m:
+                seen[m.group(1)] = True
+        return list(seen.keys())
+
+    def _getMostActiveStreamId(self, webrtcStats: dict, streamIds: list):
+        statTemplate = 'IT01V%s-framesPerSecond'
+        validIds = [sid for sid in streamIds if statTemplate % sid in webrtcStats]
+        fpsSums = [
+            sum(ast.literal_eval(webrtcStats[statTemplate % sid]['values']))
+            for sid in validIds
+        ]
+        if not fpsSums:
             return None
-        index_max = np.argmax(sum_list)
-        return valid_id_list[index_max]
+        return validIds[int(np.argmax(fpsSums))]
 
-    def is_cum_stat(self, x):
-        for cum_stat in self.cum_stat_list:
-            if '-'+cum_stat in x:
-                return True
-        return False
-
-    def get_active_stream(self, webrtc_stats, pref):
-        id_map = {}
-        for k in webrtc_stats:
-            m = re.search(f"{pref}(\d+)-", k)
-            if not m:
-                continue
-            id1 = m.group(1)
-            id_map[id1] = 1
-        return list(id_map.keys())
-
-    def get_stat(self, stat_name, st_time, et_time, val_list):
-        st_dt = datetime.timestamp(dateutil.parser.parse(st_time))
-        et_dt = datetime.timestamp(dateutil.parser.parse(et_time))
-        (t, i) = (int(st_dt), 0)
-        l = []
-        while t < et_dt and i < len(val_list):
-            l.append([t, val_list[i]])
+    def _parseStatSeries(self, statName: str, startTime: str,
+                         endTime: str, values: list) -> pd.DataFrame:
+        tStart = datetime.timestamp(dateutil.parser.parse(startTime))
+        tEnd = datetime.timestamp(dateutil.parser.parse(endTime))
+        colName = statName.split('-')[1]
+        rows = []
+        t, i = int(tStart), 0
+        while t < tEnd and i < len(values):
+            rows.append([t, values[i]])
             i += 1
             t += 1
-        stat_suff = stat_name.split("-")[1]
-        df = pd.DataFrame(l, columns=["ts", stat_suff])
-        return df
+        return pd.DataFrame(rows, columns=['ts', colName])
 
-    def get_webrtc(self):
+    # ------------------------------------------------------------------ public
+
+    def get_webrtc(self) -> pd.DataFrame:
         try:
-            webrtc = json.load(open(self.webrtc_file))
-            active_ids = []
-            unknown_key = None
-            for k in webrtc["PeerConnections"].keys():
-                if len(webrtc["PeerConnections"][k]["stats"]) == 0:
+            rawData = json.load(open(self.webrtcFile))
+            activeIds = []
+            streamId = None
+            for connKey in rawData['PeerConnections']:
+                connStats = rawData['PeerConnections'][connKey]['stats']
+                if not connStats:
                     continue
-                webrtc_stats = webrtc["PeerConnections"][k]["stats"]
-                pref = "IT01V"
-                active_ids = self.get_active_stream(
-                    webrtc_stats, pref)  # Gets a list of SSRC IDs
-                id1 = self.get_most_active(webrtc_stats, active_ids)
-                if id1 is not None and len(id1) > 0:
+                activeIds = self._getActiveStreamIds(connStats, 'IT01V')
+                streamId = self._getMostActiveStreamId(connStats, activeIds)
+                if streamId:
+                    webrtcStats = connStats
                     break
-        except Exception as e:
-            print(e)
-            return pd.DataFrame()
-        if len(active_ids) == 0:
-            print("no inbound stream")
+        except Exception as exc:
+            logger.error('Failed to parse WebRTC file %s: %s', self.webrtcFile, exc)
             return pd.DataFrame()
 
-        if id1 is None:
-            print('No frames seen in this trace')
+        if not activeIds:
+            logger.warning('No inbound stream found: %s', self.webrtcFile)
+            return pd.DataFrame()
+        if streamId is None:
+            logger.warning('No frames seen: %s', self.webrtcFile)
             return pd.DataFrame()
 
-        ##
-
-        stat_names = [f"{pref}{id1}-{stat}" for stat in self.wanted_stats[pref]]
-
+        prefix = 'IT01V'
+        statNames = [f'{prefix}{streamId}-{s}' for s in self._WANTED_STATS[prefix]]
         df_all = pd.DataFrame()
-        duration = None
-        num_val = None
+        callDuration = None
+        numSamples = None
+
         try:
-            for stat in stat_names:
-                if stat.startswith('DEPRECATED'):
+            for statName in statNames:
+                if statName.startswith('DEPRECATED') or statName not in webrtcStats:
                     continue
+                statEntry = webrtcStats[statName]
+                startTime = statEntry['startTime']
+                endTime = statEntry['endTime']
+                valList = ast.literal_eval(statEntry['values'])
 
-                (st_time, et_time) = (
-                    webrtc_stats[stat]["startTime"], webrtc_stats[stat]["endTime"])
-                if "framesReceived" in stat:
-                    st = datetime.timestamp(dateutil.parser.parse(st_time))
-                    et = datetime.timestamp(dateutil.parser.parse(et_time))
-                    duration = et-st
-                val_str = webrtc_stats[stat]["values"]
-                val_list = ast.literal_eval(val_str)
-                if self.is_cum_stat(stat):
-                    # [start_val, diff_between_consecutive_vals]
-                    val_list = [val_list[0]] + [val_list[i] - val_list[i-1]
-                                                for i in range(1, len(val_list))]
+                if 'framesReceived' in statName:
+                    tStart = datetime.timestamp(dateutil.parser.parse(startTime))
+                    tEnd = datetime.timestamp(dateutil.parser.parse(endTime))
+                    callDuration = tEnd - tStart
 
-                df_stat = self.get_stat(stat, st_time, et_time, val_list)
+                if self._isCumStat(statName):
+                    valList = [valList[0]] + [
+                        valList[i] - valList[i - 1] for i in range(1, len(valList))
+                    ]
 
-                if "framesReceived" in stat:
-                    num_val = len(df_stat)
-                # print(stat)
-                # print(df_stat.isna())
-                if df_all.empty:
-                    df_all = df_stat
-                else:
-                    df_all = pd.merge(df_all, df_stat, on="ts", how="outer")
-        except Exception as e:
-            print(
-                f'Something went wrong for stat {stat} in file {self.webrtc_file}')
-            print(e)
+                df_stat = self._parseStatSeries(statName, startTime, endTime, valList)
+                if 'framesReceived' in statName:
+                    numSamples = len(df_stat)
+                df_all = df_stat if df_all.empty else pd.merge(
+                    df_all, df_stat, on='ts', how='outer')
+        except Exception as exc:
+            logger.error('Error parsing stat %s in %s: %s', statName, self.webrtcFile, exc)
             return pd.DataFrame()
-        df_all = df_all.rename(columns={
-                               '[framesReceived/s]': 'framesReceivedPerSecond', '[framesDecoded/s]': 'framesDecodedPerSecond'})
-        df_all['duration'] = duration
-        df_all['num_vals'] = num_val
-        df_all = df_all.rename(columns={
-                               "[bytesReceived_in_bits/s]": "bitrate", "[interFrameDelayStDev_in_ms]": "frame_jitter"})
+
+        df_all = df_all.rename(columns=self._RENAME_COLS)
+        df_all['duration'] = callDuration
+        df_all['num_vals'] = numSamples
         return df_all

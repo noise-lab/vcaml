@@ -1,133 +1,125 @@
 vcaml
 ==============================
 
-An end-to-end pipeline designed to estimate QoE for WebRTC-based video conferencing applications (VCAs) without using application layer headers.
+An end-to-end pipeline for estimating QoE metrics (frames/sec, bitrate, jitter, resolution) for WebRTC-based video conferencing without using application-layer headers. Published at [IMC 2023](https://doi.org/10.1145/3618257.3624828).
 
-# 1. Download Datasets
+## Architecture
+
+```mermaid
+flowchart TD
+    subgraph Collect["Data Collection"]
+        A([VCA Session\nMeet · Teams · Webex]) -->|tcpdump / tshark| B[Network Trace\n.pcap → .csv]
+        A -->|Chrome WebRTC internals| C[WebRTC Dump\n.json]
+    end
+
+    subgraph Prepare["File Preparation"]
+        B --> D[FileProcessor\nLinks CSV ↔ JSON pairs]
+        C --> D
+        D --> E[FileValidator\nFilters anomalous traces]
+        E --> F[KfoldCVOverFiles\n5-fold CV splits]
+    end
+
+    subgraph Train["Training & Evaluation"]
+        F --> G[ModelRunner\nOrchestrates experiments]
+        G --> H[FeatureExtractor\nLSTATS · TSTATS · SIZE · IAT]
+        H --> I{Estimation Method}
+        I -->|ip-udp-ml| J[IP_UDP_ML\nRandom Forest]
+        I -->|rtp-ml| K[RTP_ML\nRandom Forest + RTP features]
+        I -->|ip-udp-heuristic| L[IP_UDP_Heuristic\nFrame grouping heuristic]
+        I -->|rtp-heuristic| M[RTP_Heuristic\nRTP timestamp grouping]
+        C --> N[WebRTCReader\nGround truth labels]
+        J & K & L & M --> O[Predictions .pkl\n+ model.pkl]
+        N --> O
+        O --> P[Evaluation\nMAE · Accuracy]
+    end
+
+    subgraph Downstream["Downstream Use Cases"]
+        P --> Q[Resource Allocation\nAdaptive bitrate · bandwidth management]
+        P --> R[Traffic Engineering\nQoE-aware routing · prioritisation]
+        P --> S[Network Monitoring\nPassive QoE inference at scale]
+    end
+
+    style Collect fill:#dbeafe,stroke:#93c5fd
+    style Prepare fill:#fef9c3,stroke:#fde047
+    style Train fill:#dcfce7,stroke:#86efac
+    style Downstream fill:#fce7f3,stroke:#f9a8d4
+```
+
+## 1. Download Datasets
 
 - [In-Lab](https://drive.google.com/file/d/1XmFqwCKzdJtYg7TQHS8gCvA5CeI_499P/view?usp=sharing)
 - [Real World](https://drive.google.com/file/d/1kASPQlokHiUlhWry6I8qM-Hc0AvHz5eq/view?usp=sharing)
 
-# 2. Install Dependencies
+Unzip and place each dataset under `data/`:
 
-1. If you intend to train and evaluate our models over your own PCAPs, you will need to create CSVs using the script `src/util/pcap2csv.py`. It requires a working `tshark` installation.
-2. For dependencies related to data collection, refer to [the data collection README](src/data/real-world/README.md).
-3. Inside a Python3 virtual environment, execute `setup.py` to install dependencies.
+```
+data/
+├── in_lab_data/
+└── real_world_data/
+```
 
-# 3. Collect Additional Data
+## 2. Install Dependencies
 
-Refer to [In-Lab Data Collection](src/data/in-lab) and [Real-World Data Collection](src/data/real-world) for more details.
+```bash
+uv sync
+```
 
-# 4. Prepare Inference pipeline
+> PCAP → CSV conversion requires `tshark` to be on PATH. See `src/util/pcap2csv.py`.
+> For data collection dependencies, see [src/data_collection/real-world/README.md](src/data_collection/real-world/README.md).
 
-For reproducing the results in our paper, download and place the datasets under `data/`.
+## 3. Configure
 
-If you intend to use your own traces, place your files under `data/` with the same directory structure as our datasets. Do not forget to modify [config.py](src/models/config.py) as per your requirments.
+Edit `config.yaml` in the project root to adjust RTP payload types, feature vector sizes, or default training parameters:
 
-# 5. Train and test models
+```yaml
+training:
+  metrics: [framesReceivedPerSecond, bitrate, frame_jitter, frameHeight]
+  estimation_methods: [ip-udp-heuristic, rtp-heuristic, ip-udp-ml, rtp-ml]
+  feature_subsets: [[LSTATS, TSTATS]]
+  k_folds: 5
+```
 
-If you want to conduct an independent analysis on our trained models, refer to the below links. These contain our model intermediates. Place them in `data/`. Then run the [notebooks](notebooks/) straight away.
+## 4. Train and Evaluate Models
+
+```bash
+# In-lab dataset (default)
+make train
+
+# Real-world dataset
+make train-rw
+
+# Custom dataset path
+make train DATASET=data/my_dataset
+
+# Restrict to specific metrics or methods
+make train ARGS='--metrics framesReceivedPerSecond --methods ip-udp-ml rtp-ml'
+```
+
+Progress and per-experiment results (MAE, accuracy) are printed to the terminal. Intermediate outputs (model pickles, per-VCA predictions) are written to `data/<dataset>_intermediates/`.
+
+## 5. Analyze Results
+
+Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Pre-trained model intermediates are also available:
 
 - [In-lab Model Intermediates](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing)
 - [Real-world Model Intermediates](https://drive.google.com/file/d/1vnLC1Sw-v_ARnf9rePOqUcOR15DjNTgA/view?usp=sharing)
 
-An example directory structure for [In-lab Model Intermediates](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing) is shown as under:
+Unzip and place them under `data/` alongside the raw datasets.
 
-```
-vcaml/data/in_lab_data_intermediates  
-├── cv_splits.pkl  --> A dictionary that stores the cross validation splits
-├── framesReceivedPerSecond_ip-udp-heuristic_LSTATS-TSTATS_in_lab_data_cv_1
-│   ├── model.pkl  --> A dictionary for each VCA for a single cross validation
-│   ├── predictions_meet.pkl  --> Predictions for a single VCA
-│   ├── predictions_teams.pkl
-│   └── predictions_webex.pkl
-├── framesReceivedPerSecond_ip-udp-heuristic_LSTATS-TSTATS_in_lab_data_cv_2
-│   ├── model.pkl
-│   ├── predictions_meet.pkl
-│   ├── predictions_teams.pkl
-│   └── predictions_webex.pkl
-├── framesReceivedPerSecond_ip-udp-heuristic_LSTATS-TSTATS_in_lab_data_cv_3
-│   ├── model.pkl
-│   ├── predictions_meet.pkl
-│   ├── predictions_teams.pkl
-│   └── predictions_webex.pkl
-```
+## 6. Collect Additional Data
 
-To train and evaluate models from scratch, refer to [run_model.py](src/models/run_model.py). Modify the below part of the code according to your requirements.
+Refer to [In-Lab Data Collection](src/data_collection/in-lab) and [Real-World Data Collection](src/data_collection/real-world) for more details.
 
-```python
-if __name__ == '__main__':
+## 7. Cite
 
-    metrics = ['framesReceivedPerSecond', 'bitrate',
-               'frame_jitter', 'frameHeight']  # what to predict
-    estimation_methods = ['ip-udp-ml', 'rtp-ml', 'ip-udp-heuristic', 'rtp-heuristic']  # how to predict
-    # groups of features as per `features.feature_extraction.py`
-    feature_subsets = [['LSTATS', 'TSTATS']]
-    data_dir = ['/home/taveesh/Documents/vcaml/data/in_lab_data']
-
-    bname = os.path.basename(data_dir[0])
-
-    # Get a list of pairs (trace_csv_file, ground_truth)
-
-    fp = FileProcessor(data_directory=data_dir[0])
-    file_dict = fp.get_linked_files()
-
-    # Create 5-fold cross validation splits and validate files. Refer `src/util/validator.py` for more details
-
-    kcv = KfoldCVOverFiles(5, file_dict, project_config, bname)
-    file_splits = kcv.split()
-
-    vca_preds = defaultdict(list)
-
-    param_list = [metrics, estimation_methods, feature_subsets, data_dir]
-
-    # Run models over 5 cross validations
-
-    for metric, estimation_method, feature_subset, data_dir in product(*param_list):
-        if metric == 'frameHeight' and 'heuristic' in estimation_method:
-            continue
-        models = []
-        cv_idx = 1
-        for fsp in file_splits:
-            model_runner = ModelRunner(
-                metric, estimation_method, feature_subset, data_dir, cv_idx)
-            vca_model = model_runner.train_model(fsp)
-            predictions = model_runner.get_test_set_predictions(fsp, vca_model)
-            models.append(vca_model)
-
-            for vca in predictions:
-                vca_preds[vca].append(pd.concat(predictions[vca], axis=0))
-
-            cv_idx += 1
-```
-
-While the models run, a file `log.txt` is created to track the progress. An example is shown below:
-
-```
-2023-09-16 14:09:14.841418	VCA: teams || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_1 || MAE_avg = 1.93 || Accuracy_avg = 77.35
-2023-09-16 14:09:14.841507	VCA: meet || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_1 || MAE_avg = 1.31 || Accuracy_avg = 87.64
-2023-09-16 14:09:14.841556	VCA: webex || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_1 || MAE_avg = 0.85 || Accuracy_avg = 90.9
-2023-09-16 14:13:23.324799	VCA: teams || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_2 || MAE_avg = 1.83 || Accuracy_avg = 82.06
-2023-09-16 14:13:23.324886	VCA: meet || Experiment : framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_2 || MAE_avg = 1.36 || Accuracy_avg = 86.45
-```
-
-# 6. Cite our work
-
-```
+```bibtex
 @inproceedings{10.1145/3618257.3624828,
     author = {Sharma, Taveesh and Mangla, Tarun and Gupta, Arpit and Jiang, Junchen and Feamster, Nick},
     title = {Estimating WebRTC Video QoE Metrics Without Using Application Headers},
     year = {2023},
-    isbn = {9798400703829},
     publisher = {Association for Computing Machinery},
-    address = {New York, NY, USA},
-    url = {https://doi.org/10.1145/3618257.3624828},
     doi = {10.1145/3618257.3624828},
-    booktitle = {Proceedings of the 2023 ACM on Internet Measurement Conference},
-    pages = {485–500},
-    numpages = {16},
-    keywords = {machine learning, access networks, quality of experience, video conferencing},
-    location = {Montreal QC, Canada},
+    booktitle = {Proceedings of the 2023 ACM Internet Measurement Conference},
     series = {IMC '23}
 }
 ```

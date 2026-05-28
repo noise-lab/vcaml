@@ -1,0 +1,69 @@
+prediction_window: 1
+video_thresh: 306
+
+n_features_size:
+  teams: 800
+  meet: 600
+  webex: 600
+
+n_features_bps:
+  teams: 800
+  meet: 600
+  webex: 600
+
+n_features_iat:
+  teams: 800
+  meet: 600
+  webex: 600
+
+rtx_ptype:
+  real_world_data:
+    meet: ["99"]
+    teams: ["101"]
+    webex: [null] # webex did not have RTX packets
+  hashed_real_world:
+    meet: ["99"]
+    teams: ["101"]
+    webex: [null]
+  in_lab_data:
+    meet: ["99"]
+    webex: [null]
+    teams: ["103"]
+  hashed_in_lab:
+    meet: ["99"]
+    webex: [null]
+    teams: ["103"]
+
+video_ptype:
+  real_world_data:
+    meet: ["98"]
+    teams: ["100"]
+    webex: ["100"]
+  hashed_real_world:
+    meet: ["98"]
+    teams: ["100"]
+    webex: ["100"]
+  in_lab_data:
+    meet: ["96", "98"]
+    webex: ["102"]
+    teams: ["102"]
+  hashed_in_lab:
+    meet: ["99"]
+    webex: [null]
+    teams: ["103"]
+
+# Default training parameters (all overridable via CLI flags in train.py)
+training:
+  metrics:
+    - framesReceivedPerSecond
+    - bitrate
+    - frame_jitter
+    - frameHeight
+  estimation_methods:
+    - ip-udp-heuristic
+    - rtp-heuristic
+    - ip-udp-ml
+    - rtp-ml
+  feature_subsets:
+    - [LSTATS, TSTATS]
+  k_folds: 5
