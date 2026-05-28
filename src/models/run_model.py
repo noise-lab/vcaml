@@ -1,218 +1,124 @@
-from collections import defaultdict
-from itertools import product
-from datetime import datetime as dt
-import pandas as pd
-from pathlib import Path
-from sklearn.metrics import mean_absolute_error, accuracy_score
-from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
-from config import project_config
-import pickle
+import logging
 import os
-import time
+import pickle
 import sys
-from os.path import dirname, abspath
+import time
+from os.path import abspath, dirname
+from pathlib import Path
+
+import pandas as pd
+from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
+from sklearn.metrics import accuracy_score, mean_absolute_error
+
 d = dirname(dirname(abspath(__file__)))
 sys.path.append(d)
-from util.file_processor import FileProcessor
-from util.file_processor import FileValidator
-from util.data_splitter import KfoldCVOverFiles
-from models.rtp_ml import RTP_ML
-from models.rtp_heuristic import RTP_Heuristic
-from models.ip_udp_ml import IP_UDP_ML
+
+from config import project_config
 from models.ip_udp_heuristic import IP_UDP_Heuristic
+from models.ip_udp_ml import IP_UDP_ML
+from models.rtp_heuristic import RTP_Heuristic
+from models.rtp_ml import RTP_ML
+from util.data_splitter import KfoldCVOverFiles
+from util.file_processor import FileProcessor
+
+logger = logging.getLogger(__name__)
+
+_FPS_METRICS = frozenset({
+    'framesPerSecond', 'framesReceived', 'framesReceivedPerSecond',
+    'framesDecodedPerSecond', 'framesRendered',
+})
+
 
 class ModelRunner:
 
-    def __init__(self, metric, estimation_method, feature_subset, data_dir, cv_index):
-
+    def __init__(self, metric, estimationMethod, featureSubset, dataDir, cvIndex):
         self.metric = metric
-        self.estimation_method = estimation_method
-        self.feature_subset = 'none' if feature_subset is None else feature_subset
-        self.data_dir = data_dir
+        self.estimationMethod = estimationMethod
+        self.featureSubset = 'none' if featureSubset is None else featureSubset
+        self.dataDir = dataDir
 
-        if feature_subset:
-            feature_subset_tag = '-'.join(feature_subset)
-        else:
-            feature_subset_tag = 'none'
+        featureTag = '-'.join(featureSubset) if featureSubset else 'none'
+        datasetName = os.path.basename(dataDir)
+        self.trialId = '_'.join(
+            [metric, estimationMethod, featureTag, datasetName, f'cv_{cvIndex}'])
+        self.cvIndex = cvIndex
 
-        data_bname = os.path.basename(data_dir)
-        self.trial_id = '_'.join(
-            [metric, estimation_method, feature_subset_tag, data_bname, f'cv_{cv_index}'])
+    def _fpsPredictionAccuracy(self, predicted, groundTruth) -> float:
+        n = len(predicted)
+        deviation = (predicted.to_numpy() - groundTruth.to_numpy())
+        return (abs(deviation) <= 2).sum() / n
 
-        self.intermediates_dir = f'{self.data_dir}_intermediates/{self.trial_id}'
+    def trainModel(self, splitFiles: dict) -> dict:
+        datasetName = os.path.basename(self.dataDir)
+        vcaModels = {}
+        for vca in splitFiles:
+            logger.info('Training  vca=%s  trial=%s', vca, self.trialId)
+            trainFiles = splitFiles[vca]['train']
+            if self.estimationMethod == 'ip-udp-ml':
+                estimator = (RandomForestClassifier()
+                             if self.metric == 'frameHeight'
+                             else RandomForestRegressor())
+                model = IP_UDP_ML(vca=vca, featureSubset=self.featureSubset,
+                                  estimator=estimator, config=project_config,
+                                  metric=self.metric, dataset=datasetName)
+                model.train(trainFiles)
+            elif self.estimationMethod == 'rtp-ml':
+                estimator = (RandomForestClassifier()
+                             if self.metric == 'frameHeight'
+                             else RandomForestRegressor())
+                model = RTP_ML(vca=vca, featureSubset=self.featureSubset,
+                               estimator=estimator, config=project_config,
+                               metric=self.metric, dataset=datasetName)
+                model.train(trainFiles)
+            elif self.estimationMethod == 'ip-udp-heuristic':
+                model = IP_UDP_Heuristic(vca=vca, metric=self.metric,
+                                         config=project_config, dataset=datasetName)
+            elif self.estimationMethod == 'rtp-heuristic':
+                model = RTP_Heuristic(vca=vca, metric=self.metric,
+                                      config=project_config, dataset=datasetName)
+            vcaModels[vca] = model
+        return vcaModels
 
-        self.cv_index = cv_index
-
-        self.model = None
-
-    def save_intermediate(self, data_object, pickle_filename):
-        pickle_filename = f'{self.trial_id}_{pickle_filename}'
-        with open(f'{self.intermediates_dir}/{pickle_filename}.pkl', 'wb') as fd:
-            pickle.dump(data_object, fd)
-
-    def load_intermediate(self, pickle_filename):
-        with open(f'{self.intermediates_dir}/{pickle_filename}.pkl', 'rb') as fd:
-            data_object = pickle.load(fd)
-        return data_object
-
-    def fps_prediction_accuracy(self, pred, truth):
-        n = len(pred)
-        df = pd.DataFrame({'pred': pred.to_numpy(), 'truth': truth.to_numpy()})
-        df['deviation'] = df['pred']-df['truth']
-        df['deviation'] = df['deviation'].abs()
-        return len(df[df['deviation'] <= 2])/n
-
-    def train_model(self, split_files):
-        bname = os.path.basename(self.data_dir)
-        vca_model = {}
-        importances = {}
-        for vca in split_files:
-            print(f'\nVCA = {vca}')
-            if self.estimation_method == 'ip-udp-ml':
-                estimator = RandomForestClassifier(
-                ) if self.metric == 'frameHeight' else RandomForestRegressor()
-                model = IP_UDP_ML(
-                    vca=vca,
-                    feature_subset=self.feature_subset,
-                    estimator=estimator,
-                    config=project_config,
-                    metric=self.metric,
-                    dataset=bname
-                )
-                model.train(split_files[vca]['train'])
-
-            elif self.estimation_method == 'rtp-ml':
-                estimator = RandomForestClassifier(
-                ) if self.metric == 'frameHeight' else RandomForestRegressor()
-                model = RTP_ML(
-                    vca=vca,
-                    feature_subset=self.feature_subset,
-                    estimator=estimator,
-                    config=project_config,
-                    metric=self.metric,
-                    dataset=bname
-                )
-                model.train(split_files[vca]['train'])
-
-            elif self.estimation_method == 'ip-udp-heuristic':
-                model = IP_UDP_Heuristic(
-                    vca=vca, metric=self.metric, config=project_config, dataset=bname)
-
-            elif self.estimation_method == 'rtp-heuristic':
-                model = RTP_Heuristic(
-                    vca=vca, metric=self.metric, config=project_config, dataset=bname)
-            vca_model[vca] = model
-        # self.save_intermediate(vca_model, 'vca_model')
-        return vca_model
-
-    def get_test_set_predictions(self, split_files, vca_model):
+    def getTestSetPredictions(self, splitFiles: dict, vcaModels: dict) -> dict:
         predictions = {}
         maes = {}
-        accs = {}
-        for vca in split_files:
+        accuracies = {}
+        for vca in splitFiles:
             predictions[vca] = []
             maes[vca] = []
-            accs[vca] = []
-            idx = 1
-            total = len(split_files[vca]['test'])
-            for file_tuple in split_files[vca]['test']:
-                print(file_tuple[0])
-                model = vca_model[vca]
-                print(
-                    f'Testing {self.estimation_method} on file {idx} out of {total}...')
-                output = model.estimate(file_tuple)
+            accuracies[vca] = []
+            testFiles = splitFiles[vca]['test']
+            totalFiles = len(testFiles)
+            for fileIdx, fileTuple in enumerate(testFiles, 1):
+                logger.debug('Testing %s on file %d/%d: %s',
+                             self.estimationMethod, fileIdx, totalFiles, fileTuple[0])
+                output = vcaModels[vca].estimate(fileTuple)
                 if output is None:
-                    idx += 1
-                    predictions[vca].append(output)
+                    predictions[vca].append(None)
                     continue
+                predCol = f'{self.metric}_{self.estimationMethod}'
+                gtCol = f'{self.metric}_gt'
                 if self.metric != 'frameHeight':
-                    mae = mean_absolute_error(
-                        output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
-                if self.metric == 'framesPerSecond' or self.metric == 'framesReceived' or self.metric == 'framesReceivedPerSecond' or self.metric == 'framesDecodedPerSecond' or self.metric == 'framesRendered':
-                    acc = self.fps_prediction_accuracy(
-                        output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
-                    accs[vca].append(acc)
-                    print(f'Accuracy = {round(acc, 2)}')
-                if self.metric != 'frameHeight':
-                    print(f'MAE = {round(mae, 2)}')
+                    mae = mean_absolute_error(output[gtCol], output[predCol])
                     maes[vca].append(mae)
-                else:
-                    a = accuracy_score(
-                        output[f'{self.metric}_gt'], output[f'{self.metric}_{self.estimation_method}'])
-                    print(f'Accuracy = {round(a, 2)}')
-                    accs[vca].append(a)
-                idx += 1
+                    logger.debug('MAE = %.2f', mae)
+                if self.metric in _FPS_METRICS:
+                    acc = self._fpsPredictionAccuracy(output[gtCol], output[predCol])
+                    accuracies[vca].append(acc)
+                    logger.debug('Accuracy = %.2f', acc)
+                if self.metric == 'frameHeight':
+                    acc = accuracy_score(output[gtCol], output[predCol])
+                    accuracies[vca].append(acc)
+                    logger.debug('Accuracy = %.2f', acc)
                 predictions[vca].append(output)
-        for vca in split_files:
-            if self.metric == 'frameHeight':
-                mae_avg = "None"
-            else:
-                mae_avg = round(sum(maes[vca])/len(maes[vca]), 2)
-            accuracy_str = ''
-            if self.metric == 'framesPerSecond' or self.metric == 'framesReceivedPerSecond' or self.metric == 'framesDecodedPerSecond' or self.metric == 'framesRendered':
-                acc_avg = round(100*sum(accs[vca])/len(accs[vca]), 2)
-                accuracy_str = f'|| Accuracy_avg = {acc_avg}'
-            line = f'{dt.now()}\tVCA: {vca} || Experiment : {self.trial_id} || MAE_avg = {mae_avg} {accuracy_str}\n'
-            with open('log.txt', 'a') as fd:
-                fd.write(line)
-        # self.save_intermediate(predictions, 'predictions')
+
+        for vca in splitFiles:
+            maeAvg = ('None' if self.metric == 'frameHeight'
+                      else round(sum(maes[vca]) / len(maes[vca]), 2) if maes[vca] else 'N/A')
+            accStr = ''
+            if self.metric in _FPS_METRICS and accuracies[vca]:
+                accAvg = round(100 * sum(accuracies[vca]) / len(accuracies[vca]), 2)
+                accStr = f'  accuracy_avg={accAvg}'
+            logger.info('RESULT  vca=%s  trial=%s  mae_avg=%s%s',
+                        vca, self.trialId, maeAvg, accStr)
         return predictions
-
-
-if __name__ == '__main__':
-
-    # Example usage
-
-    metrics = ['framesReceivedPerSecond', 'bitrate',
-               'frame_jitter', 'frameHeight']  # what to predict
-    estimation_methods = ['ip-udp-heuristic', 'rtp-heuristic', 'ip-udp-ml', 'rtp-ml']  # how to predict
-    # groups of features as per `features.feature_extraction.py`
-    feature_subsets = [['LSTATS', 'TSTATS']]
-    data_dir = ['/home/taveesh/Documents/vcaml/data/in_lab_data']
-
-    bname = os.path.basename(data_dir[0])
-
-    # Create a directory for saving model intermediates
-    intermediates_dir = f'{data_dir[0]}_intermediates'
-
-    Path(intermediates_dir).mkdir(exist_ok=True, parents=True)
-
-    # Get a list of pairs (trace_csv_file, ground_truth)
-
-    fp = FileProcessor(data_directory=data_dir[0])
-    file_dict = fp.get_linked_files()
-
-    # Create 5-fold cross validation splits and validate files. Refer `util/validator.py` for more details
-
-    kcv = KfoldCVOverFiles(5, file_dict, project_config, bname)
-    file_splits = kcv.split()
-
-    with open(f'{intermediates_dir}/cv_splits.pkl', 'wb') as fd:
-        pickle.dump(file_splits, fd)
-
-    vca_preds = defaultdict(list)
-
-    param_list = [metrics, estimation_methods, feature_subsets, data_dir]
-
-    # Run models over 5 cross validations
-
-    for metric, estimation_method, feature_subset, data_dir in product(*param_list):
-        if metric == 'frameHeight' and 'heuristic' in estimation_method:
-            continue
-        models = []
-        cv_idx = 1
-        for fsp in file_splits:
-            model_runner = ModelRunner(
-                metric, estimation_method, feature_subset, data_dir, cv_idx)
-            vca_model = model_runner.train_model(fsp)
-            Path(f'{intermediates_dir}/{model_runner.trial_id}').mkdir(exist_ok=True, parents=True)
-            predictions = model_runner.get_test_set_predictions(fsp, vca_model)
-            models.append(vca_model)
-            with open(f'{intermediates_dir}/{model_runner.trial_id}/model.pkl', 'wb') as fd:
-                pickle.dump(vca_model, fd)
-            for vca in predictions:
-                preds = pd.concat(predictions[vca], axis=0)
-                vca_preds[vca].append(preds)
-                with open(f'{intermediates_dir}/{model_runner.trial_id}/predictions_{vca}.pkl', 'wb') as fd:
-                    pickle.dump(preds, fd)
-            cv_idx += 1

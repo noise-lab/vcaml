@@ -1,62 +1,53 @@
+import logging
 import os
-from .pcap2csv import convert
 from glob import glob
-from config import project_config
+
 from .validator import FileValidator
+
+logger = logging.getLogger(__name__)
 
 
 class FileProcessor:
-    def __init__(self, data_directory):
-        self.data_directory = data_directory
 
-    def get_linked_files(self):
-        bname = os.path.basename(self.data_directory)
-        if bname == 'in_lab_data':
-            return self.get_in_lab_files()
-        elif bname == 'hashed_in_lab':
-            return self.get_in_lab_files()
-        elif bname == 'real_world_data':
-            return self.get_real_world_files()
-        elif bname == 'hashed_real_world':
-            return self.get_real_world_files()
-        return dict()
+    def __init__(self, dataDirectory):
+        self.dataDirectory = dataDirectory
 
-    def get_in_lab_files(self):
-        linked_files = {}
-        for experiment_dir in os.listdir(self.data_directory):
-            vca = experiment_dir.split('_')[1]
-            experiment_dir = os.path.join(self.data_directory, experiment_dir)
-            if vca not in linked_files:
-                linked_files[vca] = []
-            try:
-                csv_file = glob(f'{experiment_dir}/*.csv')[0]
-                webrtc_file = glob(f'{experiment_dir}/*.json')[0]
-            except:
-                print('Missing file. Discarding the experiment')
+    def get_linked_files(self) -> dict:
+        datasetName = os.path.basename(self.dataDirectory)
+        if datasetName in ('in_lab_data', 'hashed_in_lab'):
+            return self._getInLabFiles()
+        elif datasetName in ('real_world_data', 'hashed_real_world'):
+            return self._getRealWorldFiles()
+        return {}
 
-            file_tuple = (csv_file, webrtc_file)
-            linked_files[vca].append(file_tuple)
-        return linked_files
+    def _getInLabFiles(self) -> dict:
+        linkedFiles = {}
+        for experimentDir in os.listdir(self.dataDirectory):
+            vca = experimentDir.split('_')[1]
+            experimentPath = os.path.join(self.dataDirectory, experimentDir)
+            if not os.path.isdir(experimentPath):
+                continue
+            linkedFiles.setdefault(vca, [])
+            csvMatches = glob(f'{experimentPath}/*.csv')
+            jsonMatches = glob(f'{experimentPath}/*.json')
+            if not csvMatches or not jsonMatches:
+                logger.warning('Missing CSV or JSON in %s — skipping', experimentPath)
+                continue
+            linkedFiles[vca].append((csvMatches[0], jsonMatches[0]))
+        return linkedFiles
 
-    def get_real_world_files(self):
-        linked_files = {}
-        for device in os.listdir(self.data_directory):
-            dpath = f'{self.data_directory}/{device}'
-            if os.path.exists(dpath):
-                # convert(f'{dpath}')
-                csvs = glob(f'{dpath}/*.csv')
-                for csv in csvs:
-                    vca = os.path.basename(csv).split('-')[1]
-                    if vca not in linked_files:
-                        linked_files[vca] = []
-                    print(csv)
-                    bname = os.path.basename(csv)
-                    webrtc_file = bname[:-4] + ".json"
-                    if webrtc_file not in os.listdir(f'{dpath}'):
-                        print(webrtc_file)
-                        print('WebRTC file not found')
-                        continue
-                    webrtc_file = f'{dpath}/{webrtc_file}'
-                    file_tuple = (csv, webrtc_file)
-                    linked_files[vca].append(file_tuple)
-        return linked_files
+    def _getRealWorldFiles(self) -> dict:
+        linkedFiles = {}
+        for device in os.listdir(self.dataDirectory):
+            devicePath = os.path.join(self.dataDirectory, device)
+            if not os.path.isdir(devicePath):
+                continue
+            for csvFile in glob(f'{devicePath}/*.csv'):
+                vca = os.path.basename(csvFile).split('-')[1]
+                linkedFiles.setdefault(vca, [])
+                webrtcFilename = os.path.basename(csvFile)[:-4] + '.json'
+                if webrtcFilename not in os.listdir(devicePath):
+                    logger.warning('WebRTC file not found for %s — skipping', csvFile)
+                    continue
+                linkedFiles[vca].append((csvFile, os.path.join(devicePath, webrtcFilename)))
+        return linkedFiles
