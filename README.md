@@ -39,10 +39,6 @@ flowchart TD
         P --> S[Network Monitoring\nPassive QoE inference at scale]
     end
 
-    style Collect fill:#dbeafe,stroke:#93c5fd
-    style Prepare fill:#fef9c3,stroke:#fde047
-    style Train fill:#dcfce7,stroke:#86efac
-    style Downstream fill:#fce7f3,stroke:#f9a8d4
 ```
 
 ## 1. Download Datasets
