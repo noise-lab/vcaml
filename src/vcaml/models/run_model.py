@@ -1,25 +1,15 @@
 import logging
 import os
-import pickle
-import sys
-import time
-from os.path import abspath, dirname
-from pathlib import Path
 
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import accuracy_score, mean_absolute_error
 
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
-
-from config import project_config
-from models.ip_udp_heuristic import IP_UDP_Heuristic
-from models.ip_udp_ml import IP_UDP_ML
-from models.rtp_heuristic import RTP_Heuristic
-from models.rtp_ml import RTP_ML
-from util.data_splitter import KfoldCVOverFiles
-from util.file_processor import FileProcessor
+from vcaml.config import project_config
+from vcaml.models.ip_udp_heuristic import IP_UDP_Heuristic
+from vcaml.models.ip_udp_ml import IP_UDP_ML
+from vcaml.models.rtp_heuristic import RTP_Heuristic
+from vcaml.models.rtp_ml import RTP_ML
 
 logger = logging.getLogger(__name__)
 

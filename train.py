@@ -11,25 +11,19 @@ import argparse
 import logging
 import os
 import pickle
-import sys
 from itertools import product
 from pathlib import Path
 
-# Make src/ and src/models/ importable from the project root
-_srcDir = Path(__file__).resolve().parent / 'src'
-sys.path.insert(0, str(_srcDir))
-sys.path.insert(0, str(_srcDir / 'models'))
-
-from logging_setup import setup_logging
+from vcaml.logging_setup import setup_logging
 setup_logging()
 
 import pandas as pd
 import yaml
 
-from config import project_config
-from models.run_model import ModelRunner
-from util.data_splitter import KfoldCVOverFiles
-from util.file_processor import FileProcessor
+from vcaml.config import project_config
+from vcaml.models.run_model import ModelRunner
+from vcaml.util.data_splitter import KfoldCVOverFiles
+from vcaml.util.file_processor import FileProcessor
 
 logger = logging.getLogger('vcaml')
 

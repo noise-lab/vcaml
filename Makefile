@@ -1,7 +1,7 @@
 PYTHON := uv run python
 DATASET ?= data/in_lab_data
 
-.PHONY: help train train-rw
+.PHONY: help install train train-rw
 
 help:
 	@echo "vcaml — WebRTC QoE estimation pipeline"
@@ -12,6 +12,11 @@ help:
 	@echo ""
 	@echo "Override metrics or methods at the command line:"
 	@echo "  make train ARGS='--metrics framesReceivedPerSecond --methods ip-udp-ml'"
+	@echo ""
+	@echo "  make install               Install the vcaml package and all dependencies"
+
+install:
+	uv sync
 
 train:
 	$(PYTHON) train.py --dataset $(DATASET) $(ARGS)

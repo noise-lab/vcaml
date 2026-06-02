@@ -1,19 +1,13 @@
 import logging
 import math
-import sys
-from collections import defaultdict
-from os.path import abspath, dirname
 
 import numpy as np
 import pandas as pd
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
-
-from config import project_config
-from util.webrtc_reader import WebRTCReader
+from vcaml.config import project_config
+from vcaml.util.webrtc_reader import WebRTCReader
 
 _FPS_METRICS = frozenset({
     'framesPerSecond', 'framesRendered', 'framesReceived', 'framesReceivedPerSecond',

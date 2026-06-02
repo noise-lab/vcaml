@@ -1,17 +1,12 @@
 import logging
-import sys
 import warnings
-from os.path import abspath, dirname
 
 import pandas as pd
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
-
-from util.helper_functions import aggregateFrameStats, get_freeze_dur, is_freeze, readIpUdpFile
-from util.webrtc_reader import WebRTCReader
+from vcaml.util.helper_functions import aggregateFrameStats, get_freeze_dur, is_freeze, readIpUdpFile
+from vcaml.util.webrtc_reader import WebRTCReader
 
 logger = logging.getLogger(__name__)
 

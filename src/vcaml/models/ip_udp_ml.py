@@ -1,14 +1,9 @@
-import sys
 import warnings
-from os.path import abspath, dirname
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
-
-from models.base_ml_estimator import BaseMLEstimator
-from util.helper_functions import readIpUdpFile, renameNetColumns
+from vcaml.models.base_ml_estimator import BaseMLEstimator
+from vcaml.util.helper_functions import readIpUdpFile, renameNetColumns
 
 
 class IP_UDP_ML(BaseMLEstimator):

@@ -1,16 +1,11 @@
-import sys
 import warnings
-from os.path import abspath, dirname
 
 import pandas as pd
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
-
-from models.base_ml_estimator import BaseMLEstimator
-from util.helper_functions import read_net_file, renameNetColumns, selectDstIp
+from vcaml.models.base_ml_estimator import BaseMLEstimator
+from vcaml.util.helper_functions import read_net_file, renameNetColumns, selectDstIp
 
 
 class RTP_ML(BaseMLEstimator):

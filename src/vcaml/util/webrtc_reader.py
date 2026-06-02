@@ -2,16 +2,11 @@ import ast
 import json
 import logging
 import re
-import sys
 from datetime import datetime
-from os.path import abspath, dirname
 
 import dateutil.parser
 import numpy as np
 import pandas as pd
-
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
 
 logger = logging.getLogger(__name__)
 

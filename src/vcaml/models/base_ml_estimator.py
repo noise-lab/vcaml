@@ -1,18 +1,13 @@
 import logging
-import sys
 import time
 from abc import ABC, abstractmethod
-from os.path import abspath, dirname
 
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.tree import DecisionTreeRegressor
 
-d = dirname(dirname(abspath(__file__)))
-sys.path.append(d)
-
-from features.feature_extraction import FeatureExtractor
-from util.helper_functions import _FPS_METRICS, mergeWithWebrtc
+from vcaml.features.feature_extraction import FeatureExtractor
+from vcaml.util.helper_functions import _FPS_METRICS, mergeWithWebrtc
 
 logger = logging.getLogger(__name__)
 
