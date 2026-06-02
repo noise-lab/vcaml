@@ -81,6 +81,15 @@ FPS metrics use ±2 frames/sec tolerance accuracy in addition to MAE. `frameHeig
 | Microsoft Teams | ✓ | ✓ |
 | Webex | ✓ | ✓ |
 
+## Prerequisites
+
+| Tool | Purpose | Install |
+|---|---|---|
+| [`uv`](https://docs.astral.sh/uv/) | Python dependency management | `curl -LsSf https://astral.sh/uv/install.sh \| sh` |
+| [`tshark`](https://www.wireshark.org/docs/man-pages/tshark.html) | PCAP → CSV conversion | `brew install wireshark` (macOS) · `apt install tshark` (Debian/Ubuntu) |
+
+`tshark` must be on `PATH` before running `pcap2csv`. If you are working from pre-converted CSVs, `tshark` is not required.
+
 ## 1. Download Datasets
 
 - [In-Lab](https://drive.google.com/file/d/1XmFqwCKzdJtYg7TQHS8gCvA5CeI_499P/view?usp=sharing)
