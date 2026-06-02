@@ -8,38 +8,78 @@ An end-to-end pipeline for estimating QoE metrics (frames/sec, bitrate, jitter, 
 ```mermaid
 flowchart TD
     subgraph Collect["Data Collection"]
-        A([VCA Session\nMeet · Teams · Webex]) -->|tcpdump / tshark| B[Network Trace\n.pcap → .csv]
-        A -->|Chrome WebRTC internals| C[WebRTC Dump\n.json]
+        A([VCA Session\nMeet · Teams · Webex]) -->|"tcpdump / tshark"| P[".pcap files"]
+        A -->|"chrome://webrtc-internals"| C["WebRTC dump (.json)"]
+        P -->|pcap2csv| B["Network trace (.csv)"]
     end
 
     subgraph Prepare["File Preparation"]
-        B --> D[FileProcessor\nLinks CSV ↔ JSON pairs]
+        B --> D["FileProcessor\nLinks CSV ↔ JSON pairs"]
         C --> D
-        D --> E[FileValidator\nFilters anomalous traces]
-        E --> F[KfoldCVOverFiles\n5-fold CV splits]
+        D --> E["FileValidator\nFilters anomalous traces"]
+        E --> F["KfoldCVOverFiles\n5-fold CV splits"]
     end
 
     subgraph Train["Training & Evaluation"]
-        F --> G[ModelRunner\nOrchestrates experiments]
-        G --> H[FeatureExtractor\nLSTATS · TSTATS · SIZE · IAT]
-        H --> I{Estimation Method}
-        I -->|ip-udp-ml| J[IP_UDP_ML\nRandom Forest]
-        I -->|rtp-ml| K[RTP_ML\nRandom Forest + RTP features]
-        I -->|ip-udp-heuristic| L[IP_UDP_Heuristic\nFrame grouping heuristic]
-        I -->|rtp-heuristic| M[RTP_Heuristic\nRTP timestamp grouping]
-        C --> N[WebRTCReader\nGround truth labels]
-        J & K & L & M --> O[Predictions .pkl\n+ model.pkl]
-        N --> O
-        O --> P[Evaluation\nMAE · Accuracy]
+        F --> G["ModelRunner"]
+        G --> H["FeatureExtractor\nLSTATS · TSTATS · SIZE · IAT"]
+        C --> N["WebRTCReader\nGround truth labels"]
+        H --> I{"Estimation\nMethod"}
+        N --> I
+        I -->|ip-udp-ml| J["IP_UDP_ML\nRandom Forest"]
+        I -->|rtp-ml| K["RTP_ML\nRandom Forest + RTP features"]
+        I -->|ip-udp-heuristic| L["IP_UDP_Heuristic\nFrame grouping"]
+        I -->|rtp-heuristic| M["RTP_Heuristic\nRTP timestamp grouping"]
+        J & K & L & M --> O["models + predictions (.pkl)"]
     end
 
     subgraph Downstream["Downstream Use Cases"]
-        P --> Q[Resource Allocation\nAdaptive bitrate · bandwidth management]
-        P --> R[Traffic Engineering\nQoE-aware routing · prioritisation]
-        P --> S[Network Monitoring\nPassive QoE inference at scale]
+        O --> Q["Resource Allocation\nAdaptive bitrate · bandwidth management"]
+        O --> R["Traffic Engineering\nQoE-aware routing · prioritisation"]
+        O --> S["Network Monitoring\nPassive QoE inference at scale"]
     end
-
 ```
+
+## Supported Configurations
+
+### Metrics
+
+| Metric | Description | Unit | Heuristic | ML |
+|---|---|---|---|---|
+| `framesReceivedPerSecond` | Inbound video frame rate | frames/sec | ✓ | ✓ |
+| `bitrate` | Inbound video bitrate | bits/sec | ✓ | ✓ |
+| `frame_jitter` | Inter-frame delay standard deviation | ms | ✓ | ✓ |
+| `frameHeight` | Inbound video resolution height | px | — | ✓ |
+
+FPS metrics use ±2 frames/sec tolerance accuracy in addition to MAE. `frameHeight` uses classification accuracy.
+
+### Estimation Methods
+
+| Method | Uses RTP headers | `frameHeight` | Description |
+|---|---|---|---|
+| `ip-udp-ml` | No | ✓ | Random Forest over IP/UDP packet features |
+| `rtp-ml` | Yes | ✓ | Random Forest over IP/UDP + RTP-specific features |
+| `ip-udp-heuristic` | No | — | Groups packets into frames by size similarity |
+| `rtp-heuristic` | Yes | — | Groups packets into frames by RTP timestamp |
+
+### Feature Subsets (ML methods)
+
+| Subset | Description |
+|---|---|
+| `LSTATS` | Packet length statistics per window: mean, std, min, max, Q1/Q2/Q3, count, total bytes, unique sizes |
+| `TSTATS` | Inter-arrival time statistics per window: mean, std, min, max, Q1/Q2/Q3, burst count |
+| `SIZE` | Raw per-packet sizes padded/truncated to a fixed-length vector |
+| `IAT` | Raw inter-arrival times padded/truncated to a fixed-length vector |
+
+`rtp-ml` additionally extracts RTP-specific features per window: buffer time statistics, unique RTP timestamps, out-of-order sequence number count, RTP lag statistics.
+
+### Supported Platforms and Datasets
+
+| VCA | In-lab | Real-world |
+|---|---|---|
+| Google Meet | ✓ | ✓ |
+| Microsoft Teams | ✓ | ✓ |
+| Webex | ✓ | ✓ |
 
 ## 1. Download Datasets
 
@@ -57,7 +97,7 @@ data/
 ## 2. Install Dependencies
 
 ```bash
-uv sync
+make install   # or: uv sync
 ```
 
 > PCAP → CSV conversion requires `tshark` to be on PATH. See `src/vcaml/util/pcap2csv.py`.
