@@ -30,7 +30,7 @@ flowchart TD
         I -->|rtp-ml| K["RTP_ML\nRandom Forest + RTP features"]
         I -->|ip-udp-heuristic| L["IP_UDP_Heuristic\nFrame grouping"]
         I -->|rtp-heuristic| M["RTP_Heuristic\nRTP timestamp grouping"]
-        J & K & L & M --> O["models + predictions (.pkl)"]
+        J & K & L & M --> O["MLflow run\nmetrics · models · predictions"]
     end
 
     subgraph Downstream["Downstream Use Cases"]
@@ -131,16 +131,17 @@ make train DATASET=data/my_dataset
 make train ARGS='--metrics framesReceivedPerSecond --methods ip-udp-ml rtp-ml'
 ```
 
-Progress and per-experiment results (MAE, accuracy) are printed to the terminal. Intermediate outputs (model pickles, per-VCA predictions) are written to `data/<dataset>_intermediates/`.
+Progress and per-experiment results (MAE, accuracy) are printed to the terminal. All runs — parameters, per-fold metrics, model pickles, and per-VCA predictions — are logged to MLflow under `mlruns/`. Launch the UI with:
+
+```bash
+uv run mlflow ui   # then open http://localhost:5000
+```
 
 ## 5. Analyze Results
 
-Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Pre-trained model intermediates are also available:
+Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Each notebook reads results from the local MLflow store (`mlruns/`) via `vcaml.io.mlflow_loader`.
 
-- [In-lab Model Intermediates](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing)
-- [Real-world Model Intermediates](https://drive.google.com/file/d/1vnLC1Sw-v_ARnf9rePOqUcOR15DjNTgA/view?usp=sharing)
-
-Unzip and place them under `data/` alongside the raw datasets.
+> **Pre-trained results** are available as legacy pickle archives (pre-MLflow format) — [In-lab](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing) · [Real-world](https://drive.google.com/file/d/1vnLC1Sw-v_ARnf9rePOqUcOR15DjNTgA/view?usp=sharing). These require importing into MLflow before the notebooks can load them.
 
 ## 6. Collect Additional Data
 

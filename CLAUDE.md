@@ -38,7 +38,7 @@ make train-rw                      # real-world dataset
 make train DATASET=data/my_data    # custom path
 make train ARGS='--metrics framesReceivedPerSecond --methods ip-udp-ml'
 ```
-All progress and per-experiment results are printed to the terminal. No log files are written.
+All progress and per-experiment results are printed to the terminal. Each run is tracked in MLflow under `mlruns/` (parameters, per-fold MAE/accuracy, model pkl, predictions pkl, feature importances). Launch `uv run mlflow ui` to browse results.
 
 ### Step 4: Analyze results
 Open and run the notebooks in `notebooks/` (In_Lab_Analysis, Real_World_Analysis, Sensitivity_Analysis).
@@ -55,7 +55,7 @@ WebRTC dump JSON ──→ FileProcessor (links CSVs to WebRTC JSON ground truth
                            ↓
                     ModelRunner (orchestrates training and evaluation)
                            ↓
-              FeatureExtractor + Estimator → predictions saved as .pkl
+              FeatureExtractor + Estimator → results logged to MLflow (mlruns/)
 ```
 
 ### Estimation Methods
@@ -95,6 +95,7 @@ There are four estimation methods, controlled by the `estimation_method` string:
 | `src/vcaml/models/ip_udp_heuristic.py` / `rtp_heuristic.py` | Heuristic estimator subclasses |
 | `src/vcaml/io/webrtc_reader.py` | `WebRTCReader` — parses WebRTC internals JSON into a per-second DataFrame |
 | `src/vcaml/io/pcap2csv.py` | PCAP → CSV conversion via tshark |
+| `src/vcaml/io/mlflow_loader.py` | `load_results`, `load_results_for_dataset` — load experiment results from MLflow for notebook analysis |
 | `src/vcaml/pipeline/file_processor.py` | `FileProcessor` — discovers and links CSV/JSON file pairs by dataset type |
 | `src/vcaml/pipeline/validator.py` | `FileValidator` — filters out malformed or misaligned file pairs |
 | `src/vcaml/pipeline/data_splitter.py` | `KfoldCVOverFiles` — k-fold CV splits over file pairs |
@@ -104,12 +105,14 @@ There are four estimation methods, controlled by the `estimation_method` string:
 
 ### Trial ID Format
 
-`ModelRunner` generates a `trialId` used to name the output directory under `*_intermediates/`:
+`ModelRunner` generates a `trialId` used in log output to identify each fold:
 
 ```
 {metric}_{estimationMethod}_{featureTag}_{datasetName}_cv_{cvIndex}
 # e.g. framesReceivedPerSecond_ip-udp-ml_LSTATS-TSTATS_in_lab_data_cv_1
 ```
+
+In MLflow, runs are structured as a parent run per `(metric, method, featureSubset)` with nested child runs per CV fold.
 
 ### Configuration (`config.yaml` + `src/vcaml/config.py`)
 
@@ -153,12 +156,13 @@ data/
 │   └── <exp>_<vca>_*/
 │       ├── trace.csv
 │       └── webrtc.json
-├── in_lab_data_intermediates/   # Output: model.pkl, predictions_*.pkl, cv_splits.pkl
-├── real_world_data/       # Real-world traces
-│   └── <device>/
-│       ├── <ts>-<vca>-*.csv
-│       └── <ts>-<vca>-*.json
-└── real_world_data_intermediates/
+└── real_world_data/       # Real-world traces
+    └── <device>/
+        ├── <ts>-<vca>-*.csv
+        └── <ts>-<vca>-*.json
+
+mlruns/                    # MLflow artifact + metric store (auto-created by train.py)
+~/.cache/vcaml/            # Local artifact cache used by mlflow_loader (auto-created)
 ```
 
 ## MLOps Roadmap
@@ -168,7 +172,7 @@ The following improvements are planned to make vcaml reproducible and deployable
 1. **Proper packaging** — replace `sys.path.insert` hacks in `train.py` and `src/vcaml/models/` with a proper installable `vcaml` package, so all modules are importable without path manipulation.
 2. **Test suite** — add `pytest` unit tests for `FeatureExtractor`, `WebRTCReader`, and `FileValidator`; these are pure functions with well-defined inputs/outputs.
 3. **CI (GitHub Actions)** — lint (`ruff`) + test on every PR.
-4. **Experiment tracking (MLflow)** — log metric, method, feature subset, per-fold MAE/accuracy, and model artifacts instead of bare `.pkl` files.
+4. ~~**Experiment tracking (MLflow)**~~ — ✅ Done. Parent/child MLflow runs per experiment; metrics, model pkl, predictions, and feature importances logged as artifacts. Notebooks load via `vcaml.io.mlflow_loader` with a local artifact cache.
 5. **Data + pipeline versioning (DVC)** — version-track PCAP/CSV/JSON datasets with a remote; define pipeline stages (`pcap→csv`, `csv→train`) so `dvc repro` only re-runs what changed.
 6. **Inference entrypoint** — a `predict.py` CLI (or FastAPI app) that loads a trained model and runs inference on a new CSV, returning per-second QoE estimates.
 7. **Docker** — a `Dockerfile` that installs `tshark` + Python deps via `uv`, making the full pipeline self-contained.

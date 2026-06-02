@@ -20,6 +20,7 @@ dependencies = [
     "requests>=2.32",
     "python-dateutil>=2.9",
     "PyYAML>=6.0",
+    "mlflow>=2.0",
 ]
 
 [dependency-groups]

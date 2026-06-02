@@ -68,7 +68,7 @@ class ModelRunner:
             vcaModels[vca] = model
         return vcaModels
 
-    def getTestSetPredictions(self, splitFiles: dict, vcaModels: dict) -> dict:
+    def getTestSetPredictions(self, splitFiles: dict, vcaModels: dict) -> tuple[dict, dict, dict]:
         predictions = {}
         maes = {}
         accuracies = {}
@@ -110,4 +110,4 @@ class ModelRunner:
                 accStr = f'  accuracy_avg={accAvg}'
             logger.info('RESULT  vca=%s  trial=%s  mae_avg=%s%s',
                         vca, self.trialId, maeAvg, accStr)
-        return predictions
+        return predictions, maes, accuracies
