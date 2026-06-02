@@ -13,6 +13,11 @@ d = dirname(dirname(abspath(__file__)))
 sys.path.append(d)
 
 from config import project_config
+from util.webrtc_reader import WebRTCReader
+
+_FPS_METRICS = frozenset({
+    'framesPerSecond', 'framesRendered', 'framesReceived', 'framesReceivedPerSecond',
+})
 
 logger = logging.getLogger(__name__)
 
@@ -63,8 +68,10 @@ def read_net_file(dataset, filename):
 
 
 def is_freeze(x):
-    return 1 if x['frame_dur'] > max(3 * x['avg_frame_dur'],
-                                      x['avg_frame_dur'] + 0.150) else 0
+    factor = project_config['freeze_factor']
+    offset = project_config['freeze_min_offset']
+    return 1 if x['frame_dur'] > max(factor * x['avg_frame_dur'],
+                                      x['avg_frame_dur'] + offset) else 0
 
 
 def get_freeze_dur(x):
@@ -75,7 +82,7 @@ def get_net_stats(df_video, ftEndCol='frame_et'):
     df_video = df_video.sort_values(by=ftEndCol).copy()
     df_video['frame_size'] = df_video['frame_size'].astype(float)
     df_video['frame_dur'] = df_video[ftEndCol].diff()
-    df_video['avg_frame_dur'] = df_video['frame_dur'].rolling(30).mean()
+    df_video['avg_frame_dur'] = df_video['frame_dur'].rolling(project_config['freeze_window']).mean()
     df_video = df_video.fillna(0)
     df_video['frame_dur'] = df_video['frame_dur'].clip(lower=0)
     df_video['is_freeze'] = df_video.apply(is_freeze, axis=1)
@@ -91,6 +98,69 @@ def get_net_stats(df_video, ftEndCol='frame_et'):
         'is_freeze': 'freeze_count',
         'frame_size_sum': 'predicted_bitrate',
         'freeze_dur': 'freeze_dur',
+        'frame_dur_std': 'predicted_frame_jitter',
+    })
+    df_grp['predicted_bitrate'] *= 8
+    df_grp['predicted_frame_jitter'] *= 1000
+    return df_grp
+
+
+def readIpUdpFile(csvFile):
+    df = pd.read_csv(csvFile)
+    df = df[~df['ip.proto'].isna()]
+    df['ip.proto'] = df['ip.proto'].astype(str)
+    df = df[df['ip.proto'].str.contains(',') == False]
+    df['ip.proto'] = df['ip.proto'].apply(lambda x: int(float(x)))
+    df = df[df['ip.proto'] == project_config['udp_proto']]
+    try:
+        dstIp = (df.groupby('ip.dst')
+                 .agg({'udp.length': 'sum'})
+                 .reset_index()
+                 .sort_values(by='udp.length', ascending=False)
+                 .head(1)['ip.dst'].iloc[0])
+    except IndexError:
+        return None
+    df = df[df['ip.dst'] == dstIp]
+    df = df[df['udp.length'] > project_config['video_thresh']]
+    return df if not df.empty else None
+
+
+def selectDstIp(df):
+    try:
+        dstIp = (df.groupby('ip.dst')
+                 .agg({'udp.length': 'sum', 'rtp.p_type': 'count'})
+                 .reset_index()
+                 .sort_values(by='udp.length', ascending=False)
+                 .head(1)['ip.dst'].iloc[0])
+    except IndexError:
+        return None
+    return df[df['ip.dst'] == dstIp]
+
+
+def renameNetColumns(df):
+    return df.rename(columns={
+        'udp.length': 'length',
+        'frame.time_epoch': 'time',
+        'frame.time_relative': 'time_normed',
+    })
+
+
+def mergeWithWebrtc(df_features, webrtcFile, dataset, metric):
+    df_webrtc = WebRTCReader(webrtcFile, dataset).get_webrtc()[[metric, 'ts']]
+    return pd.merge(df_features, df_webrtc, left_on='et', right_on='ts')
+
+
+def aggregateFrameStats(df_frames, groupCol):
+    df_grp = (df_frames.groupby(groupCol)
+              .agg({'frame_size': ['count', 'sum'], 'is_freeze': 'sum',
+                    'freeze_dur': 'sum', 'frame_dur': 'std'})
+              .reset_index())
+    df_grp.columns = ['_'.join(col).strip('_') for col in df_grp.columns.values]
+    df_grp = df_grp.rename(columns={
+        'frame_size_count': 'predicted_framesReceivedPerSecond',
+        'is_freeze_sum': 'freeze_count',
+        'frame_size_sum': 'predicted_bitrate',
+        'freeze_dur_sum': 'freeze_dur',
         'frame_dur_std': 'predicted_frame_jitter',
     })
     df_grp['predicted_bitrate'] *= 8

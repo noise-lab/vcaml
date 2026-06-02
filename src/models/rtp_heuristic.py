@@ -10,7 +10,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 d = dirname(dirname(abspath(__file__)))
 sys.path.append(d)
 
-from util.helper_functions import get_net_stats, read_net_file
+from util.helper_functions import get_net_stats, read_net_file, selectDstIp
 from util.webrtc_reader import WebRTCReader
 
 logger = logging.getLogger(__name__)
@@ -35,18 +35,12 @@ class RTP_Heuristic:
         df = df.sort_values('frame.time_relative')
         df['frame.time_relative'] = df['frame.time_relative'].astype(float)
         df = df[df['rtp.p_type'].isin([*videoPtypes, *rtxPtypes])]
-        try:
-            dstIp = (df.groupby('ip.dst')
-                     .agg({'udp.length': 'sum', 'rtp.p_type': 'count'})
-                     .reset_index()
-                     .sort_values(by='udp.length', ascending=False)
-                     .head(1)['ip.dst'].iloc[0])
-            df = df[df['ip.dst'] == dstIp]
-        except IndexError:
+        df = selectDstIp(df)
+        if df is None:
             logger.warning('Faulty trace, skipping: %s', csvFile)
             return None
-        df = df[df['udp.length'] > 306]
-        df['udp.length'] = df['udp.length'] - 12
+        df = df[df['udp.length'] > self.config['video_thresh']]
+        df['udp.length'] = df['udp.length'] - self.config['rtp_header_size']
 
         # Group packets by RTP timestamp → one row per frame
         df_frames = (df.groupby('rtp.timestamp')

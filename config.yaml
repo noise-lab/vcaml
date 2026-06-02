@@ -1,22 +1,33 @@
-prediction_window: 1
-video_thresh: 306
+prediction_window: 1 # Granularity of predictions in seconds
+video_thresh: 306 # UDP payload length threshold for classifying a packet as video (bytes)
+udp_proto: 17 # IP protocol number for UDP
+rtp_header_size: 12 # RTP header size in bytes (subtracted from udp.length to get payload size)
 
-n_features_size:
+# IP-UDP heuristic frame grouping
+intra_tolerance: 2 # Max byte difference between consecutive packets to consider them part of the same frame
+long_gap_threshold: 8 # Frame duration (seconds) above which leading frames are dropped as pre-call silence
+
+# Freeze detection
+freeze_window: 30 # Rolling window size (frames) for computing average frame duration
+freeze_factor: 3 # Multiplier on avg_frame_dur for freeze detection threshold
+freeze_min_offset: 0.150 # Minimum additional offset (seconds) on freeze detection threshold
+
+max_lookback: # Number of packets to look back for grouping frames (IP-UDP heuristic)
+  meet: 3
+  teams: 2
+  webex: 1
+
+n_features_size: # Number of features to use for size-based heuristics and ML models
   teams: 800
   meet: 600
   webex: 600
 
-n_features_bps:
+n_features_iat: # Number of features to use for inter-arrival time-based heuristics and ML models
   teams: 800
   meet: 600
   webex: 600
 
-n_features_iat:
-  teams: 800
-  meet: 600
-  webex: 600
-
-rtx_ptype:
+rtx_ptype: # Payload types used for retransmitted packets in each dataset. Note that webex did not have RTX packets, so we set it to null. Requires manual inspection of the traces to determine.
   real_world_data:
     meet: ["99"]
     teams: ["101"]
@@ -34,7 +45,7 @@ rtx_ptype:
     webex: [null]
     teams: ["103"]
 
-video_ptype:
+video_ptype: # Payload types used for video packets in each dataset. Requires manual inspection of the traces to determine.
   real_world_data:
     meet: ["98"]
     teams: ["100"]
