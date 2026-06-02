@@ -2,8 +2,8 @@ import warnings
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from vcaml.models.base_ml_estimator import BaseMLEstimator
-from vcaml.pipeline.net_utils import readIpUdpFile, renameNetColumns
+from vcaml.models.base_ml_estimator import BaseMLEstimator  # noqa: E402
+from vcaml.pipeline.net_utils import readIpUdpFile, renameNetColumns  # noqa: E402
 
 
 class IP_UDP_ML(BaseMLEstimator):

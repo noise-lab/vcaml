@@ -5,8 +5,8 @@ import pandas as pd
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from vcaml.pipeline.net_utils import get_net_stats, read_net_file, selectDstIp
-from vcaml.io.webrtc_reader import WebRTCReader
+from vcaml.pipeline.net_utils import get_net_stats, read_net_file, selectDstIp  # noqa: E402
+from vcaml.io.webrtc_reader import WebRTCReader  # noqa: E402
 
 logger = logging.getLogger(__name__)
 

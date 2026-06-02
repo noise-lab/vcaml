@@ -34,7 +34,7 @@ class FileValidator:
         df_net = df_net[(df_net['ip.dst'] == dstIp) & (~pd.isna(df_net['rtp.ssrc']))]
         df_net['rtp.p_type'] = df_net['rtp.p_type'].apply(filter_ptype)
         df_net['ip.proto'] = df_net['ip.proto'].astype(str)
-        df_net = df_net[df_net['ip.proto'].str.contains(',') == False]
+        df_net = df_net[~df_net['ip.proto'].str.contains(',')]
         df_net = df_net[~df_net['ip.proto'].isna()]
         try:
             df_net['ip.proto'] = df_net['ip.proto'].apply(lambda x: int(float(x)))

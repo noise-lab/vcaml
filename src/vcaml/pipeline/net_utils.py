@@ -6,8 +6,8 @@ import pandas as pd
 
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
-from vcaml.config import project_config
-from vcaml.io.webrtc_reader import WebRTCReader
+from vcaml.config import project_config  # noqa: E402
+from vcaml.io.webrtc_reader import WebRTCReader  # noqa: E402
 
 _FPS_METRICS = frozenset({
     'framesPerSecond', 'framesRendered', 'framesReceived', 'framesReceivedPerSecond',
@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 
 def filter_ptype(x):
-    if type(x) != str and math.isnan(x):
+    if not isinstance(x, str) and math.isnan(x):
         return x
     x = str(x)
     if ',' in x:
@@ -56,7 +56,7 @@ def read_net_file(dataset, filename):
     df_net = df_net[~df_net['ip.proto'].isna()]
     df_net['rtp.p_type'] = df_net['rtp.p_type'].apply(filter_ptype).dropna()
     df_net['ip.proto'] = df_net['ip.proto'].astype(str)
-    df_net = df_net[df_net['ip.proto'].str.contains(',') == False]
+    df_net = df_net[~df_net['ip.proto'].str.contains(',')]
     df_net['ip.proto'] = df_net['ip.proto'].apply(lambda x: int(float(x)))
     return df_net if not df_net.empty else None
 
@@ -103,7 +103,7 @@ def readIpUdpFile(csvFile):
     df = pd.read_csv(csvFile)
     df = df[~df['ip.proto'].isna()]
     df['ip.proto'] = df['ip.proto'].astype(str)
-    df = df[df['ip.proto'].str.contains(',') == False]
+    df = df[~df['ip.proto'].str.contains(',')]
     df['ip.proto'] = df['ip.proto'].apply(lambda x: int(float(x)))
     df = df[df['ip.proto'] == project_config['udp_proto']]
     try:

@@ -1,7 +1,6 @@
 import logging
 import os
 
-import pandas as pd
 from sklearn.ensemble import RandomForestClassifier, RandomForestRegressor
 from sklearn.metrics import accuracy_score, mean_absolute_error
 

@@ -4,8 +4,8 @@ import pandas as pd
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from vcaml.models.base_ml_estimator import BaseMLEstimator
-from vcaml.pipeline.net_utils import read_net_file, renameNetColumns, selectDstIp
+from vcaml.models.base_ml_estimator import BaseMLEstimator  # noqa: E402
+from vcaml.pipeline.net_utils import read_net_file, renameNetColumns, selectDstIp  # noqa: E402
 
 
 class RTP_ML(BaseMLEstimator):

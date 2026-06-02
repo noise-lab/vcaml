@@ -30,6 +30,7 @@ notebooks = [
 ]
 dev = [
     "pytest>=8.0",
+    "ruff>=0.4",
 ]
 
 [tool.pytest.ini_options]

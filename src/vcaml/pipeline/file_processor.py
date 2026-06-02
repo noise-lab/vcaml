@@ -2,7 +2,6 @@ import logging
 import os
 from glob import glob
 
-from .validator import FileValidator
 
 logger = logging.getLogger(__name__)
 
