@@ -22,8 +22,8 @@ import yaml
 
 from vcaml.config import project_config
 from vcaml.models.run_model import ModelRunner
-from vcaml.util.data_splitter import KfoldCVOverFiles
-from vcaml.util.file_processor import FileProcessor
+from vcaml.pipeline.data_splitter import KfoldCVOverFiles
+from vcaml.pipeline.file_processor import FileProcessor
 
 logger = logging.getLogger('vcaml')
 

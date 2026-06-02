@@ -28,6 +28,12 @@ notebooks = [
     "ipykernel>=6.29",
     "graphviz>=0.20",
 ]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.uv]
 default-groups = ["notebooks"]

@@ -5,8 +5,8 @@ import pandas as pd
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-from vcaml.util.helper_functions import aggregateFrameStats, get_freeze_dur, is_freeze, readIpUdpFile
-from vcaml.util.webrtc_reader import WebRTCReader
+from vcaml.pipeline.net_utils import aggregateFrameStats, get_freeze_dur, is_freeze, readIpUdpFile
+from vcaml.io.webrtc_reader import WebRTCReader
 
 logger = logging.getLogger(__name__)
 

@@ -7,7 +7,7 @@ import pandas as pd
 pd.set_option('display.float_format', lambda x: '%.2f' % x)
 
 from vcaml.config import project_config
-from vcaml.util.webrtc_reader import WebRTCReader
+from vcaml.io.webrtc_reader import WebRTCReader
 
 _FPS_METRICS = frozenset({
     'framesPerSecond', 'framesRendered', 'framesReceived', 'framesReceivedPerSecond',

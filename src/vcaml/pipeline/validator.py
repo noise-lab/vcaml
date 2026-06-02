@@ -2,8 +2,8 @@ import logging
 
 import pandas as pd
 
-from .helper_functions import filter_ptype
-from .webrtc_reader import WebRTCReader
+from .net_utils import filter_ptype
+from vcaml.io.webrtc_reader import WebRTCReader
 
 logger = logging.getLogger(__name__)
 

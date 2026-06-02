@@ -5,7 +5,7 @@ import pandas as pd
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 from vcaml.models.base_ml_estimator import BaseMLEstimator
-from vcaml.util.helper_functions import read_net_file, renameNetColumns, selectDstIp
+from vcaml.pipeline.net_utils import read_net_file, renameNetColumns, selectDstIp
 
 
 class RTP_ML(BaseMLEstimator):

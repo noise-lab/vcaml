@@ -100,7 +100,7 @@ data/
 make install   # or: uv sync
 ```
 
-> PCAP → CSV conversion requires `tshark` to be on PATH. See `src/vcaml/util/pcap2csv.py`.
+> PCAP → CSV conversion requires `tshark` to be on PATH. See `src/vcaml/io/pcap2csv.py`.
 > For data collection dependencies, see [src/data_collection/real-world/README.md](src/data_collection/real-world/README.md).
 
 ## 3. Configure

@@ -3,7 +3,7 @@ import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
 from vcaml.models.base_ml_estimator import BaseMLEstimator
-from vcaml.util.helper_functions import readIpUdpFile, renameNetColumns
+from vcaml.pipeline.net_utils import readIpUdpFile, renameNetColumns
 
 
 class IP_UDP_ML(BaseMLEstimator):

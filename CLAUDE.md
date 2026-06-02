@@ -27,7 +27,7 @@ Run from `src/data_collection/in-lab/` via `python -m vcqoe -h` for options.
 
 ### Step 2: Convert PCAPs to CSVs (if starting from raw captures)
 ```python
-from vcaml.util.pcap2csv import convert
+from vcaml.io.pcap2csv import convert
 convert('/path/to/directory/with/pcaps')
 ```
 
@@ -90,15 +90,15 @@ There are four estimation methods, controlled by the `estimation_method` string:
 | `src/vcaml/config.py` | Loads `config.yaml` and exposes `project_config` for all modules |
 | `src/vcaml/models/run_model.py` | `ModelRunner` — orchestrates fold training and evaluation |
 | `src/vcaml/models/base_ml_estimator.py` | `BaseMLEstimator` — shared Random Forest training logic |
+| `src/vcaml/feature_extraction.py` | `FeatureExtractor` — all feature computation |
 | `src/vcaml/models/ip_udp_ml.py` / `rtp_ml.py` | ML estimator subclasses |
 | `src/vcaml/models/ip_udp_heuristic.py` / `rtp_heuristic.py` | Heuristic estimator subclasses |
-| `src/vcaml/features/feature_extraction.py` | `FeatureExtractor` — all feature computation |
-| `src/vcaml/util/file_processor.py` | `FileProcessor` — file discovery and CSV/JSON linking |
-| `src/vcaml/util/data_splitter.py` | `KfoldCVOverFiles` — k-fold splitting over files |
-| `src/vcaml/util/validator.py` | `FileValidator` — filters out malformed/unusable file pairs |
-| `src/vcaml/util/webrtc_reader.py` | `WebRTCReader` — parses WebRTC internals JSON |
-| `src/vcaml/util/helper_functions.py` | Shared utilities: `filter_video_frames`, `mark_video_frames`, `read_net_file`, `mergeWithWebrtc`, `_FPS_METRICS` |
-| `src/vcaml/util/pcap2csv.py` | PCAP → CSV conversion via tshark |
+| `src/vcaml/io/webrtc_reader.py` | `WebRTCReader` — parses WebRTC internals JSON into a per-second DataFrame |
+| `src/vcaml/io/pcap2csv.py` | PCAP → CSV conversion via tshark |
+| `src/vcaml/pipeline/file_processor.py` | `FileProcessor` — discovers and links CSV/JSON file pairs by dataset type |
+| `src/vcaml/pipeline/validator.py` | `FileValidator` — filters out malformed or misaligned file pairs |
+| `src/vcaml/pipeline/data_splitter.py` | `KfoldCVOverFiles` — k-fold CV splits over file pairs |
+| `src/vcaml/pipeline/net_utils.py` | Network trace utilities: `read_net_file`, `readIpUdpFile`, `renameNetColumns`, `mergeWithWebrtc`, `filter_ptype`, `_FPS_METRICS` |
 | `src/data_collection/in-lab/` | Automated in-lab call + capture scripts (Selenium + tshark) |
 | `src/data_collection/real-world/` | Automated real-world call scripts (Selenium) |
 
