@@ -30,7 +30,7 @@ class FileProcessor:
             csvMatches = glob(f'{experimentPath}/*.csv')
             jsonMatches = glob(f'{experimentPath}/*.json')
             if not csvMatches or not jsonMatches:
-                logger.warning('Missing CSV or JSON in %s — skipping', experimentPath)
+                logger.debug('Missing CSV or JSON in %s — skipping', experimentPath)
                 continue
             linkedFiles[vca].append((csvMatches[0], jsonMatches[0]))
         return linkedFiles
@@ -46,7 +46,7 @@ class FileProcessor:
                 linkedFiles.setdefault(vca, [])
                 webrtcFilename = os.path.basename(csvFile)[:-4] + '.json'
                 if webrtcFilename not in os.listdir(devicePath):
-                    logger.warning('WebRTC file not found for %s — skipping', csvFile)
+                    logger.debug('WebRTC file not found for %s — skipping', csvFile)
                     continue
                 linkedFiles[vca].append((csvFile, os.path.join(devicePath, webrtcFilename)))
         return linkedFiles

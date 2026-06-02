@@ -24,7 +24,7 @@ import mlflow
 import pandas as pd
 import yaml
 
-from vcaml.config import project_config
+from vcaml.config import mlflow_tracking_uri, project_config
 from vcaml.models.run_model import ModelRunner
 from vcaml.pipeline.data_splitter import KfoldCVOverFiles
 from vcaml.pipeline.file_processor import FileProcessor
@@ -152,7 +152,7 @@ def main():
     logger.info('Features: %s', featureSubsets)
     logger.info('K-folds:  %d', kFolds)
 
-    mlflow.set_tracking_uri(str(Path(__file__).parent / 'mlruns'))
+    mlflow.set_tracking_uri(mlflow_tracking_uri)
     mlflow.set_experiment(datasetName)
 
     fileSplits = _build_file_splits(dataDir, kFolds)

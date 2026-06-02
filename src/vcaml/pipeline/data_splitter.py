@@ -2,6 +2,7 @@ import logging
 
 import numpy as np
 from sklearn.model_selection import KFold
+from tqdm import tqdm
 
 from .validator import FileValidator
 
@@ -17,15 +18,16 @@ class KfoldCVOverFiles:
         self.dataset = dataset
 
     def _filterFiles(self) -> dict:
-        logger.info('Filtering anomalous files...')
-        filteredFiles = {}
-        for vca, filePairs in self.fileDict.items():
-            filteredFiles[vca] = []
-            for fileTuple in filePairs:
-                validator = FileValidator(
-                    fileTuple=fileTuple, config=self.config, dataset=self.dataset)
-                if validator.validate():
+        allPairs = [(vca, ft) for vca, pairs in self.fileDict.items() for ft in pairs]
+        filteredFiles = {vca: [] for vca in self.fileDict}
+        valid = 0
+        with tqdm(allPairs, desc='Validating data files', unit='file') as bar:
+            for vca, fileTuple in bar:
+                if FileValidator(fileTuple=fileTuple, config=self.config, dataset=self.dataset).validate():
+                    valid += 1
                     filteredFiles[vca].append(fileTuple)
+        total = len(allPairs)
+        logger.info('File validation: %d total, %d valid, %d invalid', total, valid, total - valid)
         return filteredFiles
 
     def split(self) -> list:

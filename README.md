@@ -140,15 +140,15 @@ make train DATASET=data/my_dataset
 make train ARGS='--metrics framesReceivedPerSecond --methods ip-udp-ml rtp-ml'
 ```
 
-Progress and per-experiment results (MAE, accuracy) are printed to the terminal. All runs — parameters, per-fold metrics, model pickles, and per-VCA predictions — are logged to MLflow under `mlruns/`. Launch the UI with:
+Progress and per-experiment results (MAE, accuracy) are printed to the terminal. All runs — parameters, per-fold metrics, model pickles, and per-VCA predictions — are logged to MLflow in `mlruns.db` (SQLite). Launch the UI with:
 
 ```bash
-uv run mlflow ui   # then open http://localhost:5000
+uv run mlflow ui --backend-store-uri sqlite:///mlruns.db   # then open http://localhost:5000
 ```
 
 ## 5. Analyze Results
 
-Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Each notebook reads results from the local MLflow store (`mlruns/`) via `vcaml.io.mlflow_loader`.
+Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Each notebook reads results from the local MLflow store (`mlruns.db`) via `vcaml.io.mlflow_loader`.
 
 > **Pre-trained results** are available as legacy pickle archives (pre-MLflow format) — [In-lab](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing) · [Real-world](https://drive.google.com/file/d/1vnLC1Sw-v_ARnf9rePOqUcOR15DjNTgA/view?usp=sharing). These require importing into MLflow before the notebooks can load them.
 

@@ -95,3 +95,7 @@ netrics-venv/
 
 # uv
 .venv/
+
+# mlflow
+mlruns.db
+mlruns/

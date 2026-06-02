@@ -1,3 +1,4 @@
+mlflow_db: mlruns.db  # SQLite database for MLflow tracking (resolved relative to project root)
 prediction_window: 1 # Granularity of predictions in seconds
 video_thresh: 306 # UDP payload length threshold for classifying a packet as video (bytes)
 udp_proto: 17 # IP protocol number for UDP

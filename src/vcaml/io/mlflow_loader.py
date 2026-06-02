@@ -15,6 +15,8 @@ from pathlib import Path
 import mlflow
 import pandas as pd
 
+from vcaml.config import mlflow_tracking_uri as _DEFAULT_TRACKING_URI
+
 _CACHE_ROOT = Path.home() / '.cache' / 'vcaml' / 'mlflow_artifacts'
 
 
@@ -49,7 +51,7 @@ def _find_child_run(client, experiment_id, metric, method_key, feature_tag, cv_i
 
 
 def load_results(experiment_name, metrics, methods, vcas,
-                 k_folds=5, feature_tag='LSTATS-TSTATS', tracking_uri=None):
+                 k_folds=5, feature_tag='LSTATS-TSTATS', tracking_uri=_DEFAULT_TRACKING_URI):
     """Load prediction results and feature importances from MLflow.
 
     Returns (df, f_imp) where:
@@ -57,8 +59,7 @@ def load_results(experiment_name, metrics, methods, vcas,
         metric, cross_val, deviation, abs_deviation
       - f_imp[metric][cv][vca] = {feature_name: importance}
     """
-    if tracking_uri:
-        mlflow.set_tracking_uri(tracking_uri)
+    mlflow.set_tracking_uri(tracking_uri)
 
     client = mlflow.MlflowClient()
     experiment = client.get_experiment_by_name(experiment_name)
@@ -123,7 +124,7 @@ def load_results(experiment_name, metrics, methods, vcas,
 
 
 def load_results_for_dataset(dataset_name, metrics, methods, vcas,
-                              k_folds=1, feature_tag='LSTATS-TSTATS', tracking_uri=None):
+                              k_folds=1, feature_tag='LSTATS-TSTATS', tracking_uri=_DEFAULT_TRACKING_URI):
     """Load prediction results for a single sensitivity dataset from MLflow.
 
     Returns df with an additional sens_dataset column.

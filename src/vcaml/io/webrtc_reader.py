@@ -101,10 +101,10 @@ class WebRTCReader:
             return pd.DataFrame()
 
         if not activeIds:
-            logger.warning('No inbound stream found: %s', self.webrtcFile)
+            logger.debug('No inbound stream found: %s', self.webrtcFile)
             return pd.DataFrame()
         if streamId is None:
-            logger.warning('No frames seen: %s', self.webrtcFile)
+            logger.debug('No frames seen: %s', self.webrtcFile)
             return pd.DataFrame()
 
         prefix = 'IT01V'
