@@ -9,4 +9,5 @@ with open(_project_root / 'config.yaml') as _f:
 # Expose only the runtime config keys (exclude training defaults)
 project_config = {k: v for k, v in _cfg.items() if k != 'training'}
 
-mlflow_tracking_uri = f"sqlite:///{_project_root / _cfg['mlflow_db']}"
+data_root = Path(_cfg.get('data_root', '/data/taveesh/vca'))
+mlflow_tracking_uri = f"sqlite:///{data_root / _cfg['mlflow_db']}"

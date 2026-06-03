@@ -1,4 +1,9 @@
-mlflow_db: mlruns.db  # SQLite database for MLflow tracking (resolved relative to project root)
+data_root: /data/taveesh/vca  # Root directory for datasets and MLflow artifacts
+mlflow_db: mlruns.db  # SQLite database filename (resolved relative to data_root)
+
+gdrive:
+  in_lab_data: "1XmFqwCKzdJtYg7TQHS8gCvA5CeI_499P"
+  real_world_data: "1kASPQlokHiUlhWry6I8qM-Hc0AvHz5eq"
 prediction_window: 1 # Granularity of predictions in seconds
 video_thresh: 306 # UDP payload length threshold for classifying a packet as video (bytes)
 udp_proto: 17 # IP protocol number for UDP

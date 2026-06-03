@@ -15,9 +15,9 @@ from pathlib import Path
 import mlflow
 import pandas as pd
 
-from vcaml.config import mlflow_tracking_uri as _DEFAULT_TRACKING_URI
+from vcaml.config import data_root, mlflow_tracking_uri as _DEFAULT_TRACKING_URI
 
-_CACHE_ROOT = Path.home() / '.cache' / 'vcaml' / 'mlflow_artifacts'
+_CACHE_ROOT = data_root / '.cache' / 'vcaml' / 'mlflow_artifacts'
 
 
 def _cached_artifact(run_id: str, artifact_name: str) -> Path:

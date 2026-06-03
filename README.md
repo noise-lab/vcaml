@@ -1,6 +1,8 @@
 vcaml
 ==============================
 
+[![CI](https://github.com/noise-lab/vcaml/actions/workflows/ci.yml/badge.svg)](https://github.com/noise-lab/vcaml/actions/workflows/ci.yml)
+
 An end-to-end pipeline for estimating QoE metrics (frames/sec, bitrate, jitter, resolution) for WebRTC-based video conferencing without using application-layer headers. Published at [IMC 2023](https://doi.org/10.1145/3618257.3624828).
 
 ## Architecture
@@ -92,16 +94,23 @@ FPS metrics use ±2 frames/sec tolerance accuracy in addition to MAE. `frameHeig
 
 ## 1. Download Datasets
 
-- [In-Lab](https://drive.google.com/file/d/1XmFqwCKzdJtYg7TQHS8gCvA5CeI_499P/view?usp=sharing)
-- [Real World](https://drive.google.com/file/d/1kASPQlokHiUlhWry6I8qM-Hc0AvHz5eq/view?usp=sharing)
+Use the download script (requires `gdown`, included in dependencies):
 
-Unzip and place each dataset under `data/`:
+```bash
+make download-data                               # download both datasets to data_root from config.yaml
+make download-data DATAROOT=data                 # download to ./data/ instead
+make download-data ARGS='--dataset in_lab_data'  # download only one dataset
+```
+
+Datasets are extracted automatically to `<DATAROOT>/`:
 
 ```
-data/
+<DATAROOT>/
 ├── in_lab_data/
 └── real_world_data/
 ```
+
+> Alternatively, download manually from Google Drive: [In-Lab](https://drive.google.com/file/d/1XmFqwCKzdJtYg7TQHS8gCvA5CeI_499P/view?usp=sharing) · [Real World](https://drive.google.com/file/d/1kASPQlokHiUlhWry6I8qM-Hc0AvHz5eq/view?usp=sharing)
 
 ## 2. Install Dependencies
 
@@ -114,15 +123,20 @@ make install   # or: uv sync
 
 ## 3. Configure
 
-Edit `config.yaml` in the project root to adjust RTP payload types, feature vector sizes, or default training parameters:
+Edit `config.yaml` in the project root. The most commonly changed fields are:
 
 ```yaml
+data_root: /data/taveesh/vca   # root for datasets; used by make download-data and make train
+mlflow_db: mlruns.db           # SQLite file for MLflow tracking (resolved relative to data_root)
+
 training:
   metrics: [framesReceivedPerSecond, bitrate, frame_jitter, frameHeight]
   estimation_methods: [ip-udp-heuristic, rtp-heuristic, ip-udp-ml, rtp-ml]
   feature_subsets: [[LSTATS, TSTATS]]
   k_folds: 5
 ```
+
+`data_root` defaults to `/data/taveesh/vca` — change it to wherever you placed the datasets (or override at the command line with `make train DATASET=<path>`).
 
 ## 4. Train and Evaluate Models
 
@@ -140,17 +154,20 @@ make train DATASET=data/my_dataset
 make train ARGS='--metrics framesReceivedPerSecond --methods ip-udp-ml rtp-ml'
 ```
 
-Progress and per-experiment results (MAE, accuracy) are printed to the terminal. All runs — parameters, per-fold metrics, model pickles, and per-VCA predictions — are logged to MLflow in `mlruns.db` (SQLite). Launch the UI with:
+Progress and per-experiment results (MAE, accuracy) are printed to the terminal. Each run is tracked in MLflow (`<data_root>/mlruns.db`, SQLite) under an experiment named after the dataset (e.g. `in_lab_data`). Runs are structured as:
+
+- **Parent run** per `(metric, method, featureSubset)` — aggregated mean MAE/accuracy across folds
+- **Child run** per CV fold — per-fold MAE/accuracy, model pickle, predictions, and feature importances
+
+Launch the UI with:
 
 ```bash
-uv run mlflow ui --backend-store-uri sqlite:///mlruns.db   # then open http://localhost:5000
+make mlflow-ui   # then open http://localhost:5000
 ```
 
 ## 5. Analyze Results
 
-Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Each notebook reads results from the local MLflow store (`mlruns.db`) via `vcaml.io.mlflow_loader`.
-
-> **Pre-trained results** are available as legacy pickle archives (pre-MLflow format) — [In-lab](https://drive.google.com/file/d/1w5zR-jAxcUNBAk23Q_YcuC5loOT2Ijr9/view?usp=sharing) · [Real-world](https://drive.google.com/file/d/1vnLC1Sw-v_ARnf9rePOqUcOR15DjNTgA/view?usp=sharing). These require importing into MLflow before the notebooks can load them.
+Open and run the notebooks in `notebooks/` (`In_Lab_Analysis`, `Real_World_Analysis`, `Sensitivity_Analysis`). Each notebook loads results from the local MLflow store via `vcaml.io.mlflow_loader.load_results`, passing the experiment name (e.g. `in_lab_data`) to retrieve predictions and feature importances. Artifacts are cached under `~/.cache/vcaml/mlflow_artifacts/` so repeated notebook runs do not re-fetch from MLflow.
 
 ## 6. Collect Additional Data
 
