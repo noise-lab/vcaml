@@ -90,8 +90,8 @@ target/
 .mypy_cache/
 
 # Project-specific
-
 netrics-venv/
+paper_plots/
 
 # uv
 .venv/
